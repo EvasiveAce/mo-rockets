@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/BodyDefault.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/BodyVariant2.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/BodyVariant3.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/RocketBody.gd" type="Script" id=4]
+
+[node name="RocketBody" type="Node2D"]
+visible = false
+script = ExtResource( 4 )
+texture1 = ExtResource( 1 )
+texture2 = ExtResource( 2 )
+texture3 = ExtResource( 3 )
+
+[node name="RocketBodySprite" type="Sprite" parent="."]
+
+[node name="RocketLabelName" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
