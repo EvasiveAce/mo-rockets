@@ -32,6 +32,7 @@ var mk1BottomUpgrade = false
 
 # Modifier Upgrades
 var speedTraitUpgrade
+var fuelTraitUpgrade
 
 ## TOGGLES ##
 var automation1 = false
@@ -59,7 +60,7 @@ var partChoiceUpgrade = false
 var automation1Upgrade = false
 var rdBuildingUpgrade = false
 
-var research = 111111
+var research = 0
 
 func _determineTrait(part, partName, value : float):
 	if part.StatType.keys()[partName] == part.StatType.keys()[part.StatType.SPEED]:

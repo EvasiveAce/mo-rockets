@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="UpgradePart" load_steps=9 format=3 uid="uid://b3gpk3da0g8vy"]
+
+[ext_resource type="Script" uid="uid://bu2nlniaggkea" path="res://Data/Modifiers/Scripts/Modifier.gd" id="1_itghd"]
+[ext_resource type="Texture2D" uid="uid://b1yoeqmxtwpii" path="res://Upgrades/ModifierUpgrades/FuelModifierUpgrades/Sprites/FuelTraitUpgradeBought.png" id="1_qoyuu"]
+[ext_resource type="Resource" uid="uid://cc5tdgpaudhvy" path="res://Data/Modifiers/FuelModifiers/Bare.tres" id="2_2bjdr"]
+[ext_resource type="Texture2D" uid="uid://cljjy34r1iwlr" path="res://Upgrades/ModifierUpgrades/FuelModifierUpgrades/Sprites/FuelTraitUpgrade.png" id="2_fp1i6"]
+[ext_resource type="Resource" uid="uid://cy0v7lmoks2kw" path="res://Data/Modifiers/FuelModifiers/Efficient.tres" id="3_qoyuu"]
+[ext_resource type="Resource" uid="uid://b7hmvwablyem7" path="res://Data/Modifiers/FuelModifiers/Leaky.tres" id="4_fp1i6"]
+[ext_resource type="Script" uid="uid://8usv0vhqicv1" path="res://Upgrades/Scripts/UpgradePart.gd" id="6_6clcs"]
+[ext_resource type="Resource" uid="uid://s6vwppy3q5ci" path="res://Data/Modifiers/FuelModifiers/Loaded.tres" id="7_qoyuu"]
+
+[resource]
+script = ExtResource("6_6clcs")
+modifiersToAdd = Array[ExtResource("1_itghd")]([ExtResource("2_2bjdr"), ExtResource("3_qoyuu"), ExtResource("4_fp1i6"), ExtResource("7_qoyuu")])
+constantsName = "fuelTraitUpgrade"
+boughtBool = false
+unlockedBool = true
+upgradeName = "Fuel Trait I"
+upgradeCost = 2
+upgradeDesc = "\"Filler up please\""
+upgradeInfo = "Unlocks 4 fuel related part modifiers!"
+iconSprite = ExtResource("2_fp1i6")
+boughtSprite = ExtResource("1_qoyuu")
+metadata/_custom_type_script = "uid://8usv0vhqicv1"

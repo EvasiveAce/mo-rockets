@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://kapeogwyt0w1"]
+[gd_scene load_steps=12 format=3 uid="uid://kapeogwyt0w1"]
 
 [ext_resource type="Script" uid="uid://cwfy3n2slrvlx" path="res://Common/ShopDetails/Scripts/ShopDetails.gd" id="1_58gqw"]
 [ext_resource type="PackedScene" uid="uid://dbddfvsqmxdtu" path="res://Rockets/BaseRocket/Scenes/BaseNoseUpgrade.tscn" id="2_ihlxu"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cr65lsu2lh4dr" path="res://Rockets/BaseRocket/Scenes/BaseBottomUpgrade.tscn" id="5_3u8n8"]
 [ext_resource type="PackedScene" uid="uid://cgc485rj72idb" path="res://Rockets/Mk1Rocket/Scenes/Mk1BodyUpgrade.tscn" id="6_xheyg"]
 [ext_resource type="PackedScene" uid="uid://h6vvrbfnchau" path="res://Rockets/Mk1Rocket/Scenes/Mk1BottomUpgrade.tscn" id="8_djt5a"]
+[ext_resource type="PackedScene" uid="uid://bdxs7kaaura73" path="res://Upgrades/ModifierUpgrades/FuelModifierUpgrades/Scenes/FuelTraitUpgrade.tscn" id="9_dy2q4"]
 [ext_resource type="PackedScene" uid="uid://dlu753lyvtiwd" path="res://Upgrades/ModifierUpgrades/SpeedModifierUpgrades/Scenes/SpeedTraitUpgrade.tscn" id="9_t60j5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4e3od"]
@@ -85,4 +86,10 @@ offset_bottom = 0.0
 offset_left = -704.0
 offset_top = 192.0
 offset_right = -640.0
+offset_bottom = 256.0
+
+[node name="FuelTraitUpgrade" parent="." instance=ExtResource("9_dy2q4")]
+offset_left = -512.0
+offset_top = 192.0
+offset_right = -448.0
 offset_bottom = 256.0
