@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr65lsu2lh4dr"]
+
+[ext_resource type="Script" uid="uid://b77xufs4l6ode" path="res://Rockets/BaseRocket/Scripts/BaseBottomUpgrade.gd" id="1_03f5t"]
+[ext_resource type="Texture2D" uid="uid://brei18nh6xwju" path="res://Rockets/BaseRocket/Sprites/Icons/BaseBottomIcon.png" id="2_fjatc"]
+[ext_resource type="Resource" uid="uid://0b8nih5n6jeg" path="res://Rockets/BaseRocket/Resources/BaseBottom.tres" id="2_ojb7v"]
+[ext_resource type="AudioStream" uid="uid://88ryy4i3csdm" path="res://Upgrades/Sounds/UpgradeBought.wav" id="3_ojb7v"]
+
+[node name="BaseBottomUpgrade" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = -1
+anchor_right = 0.033
+anchor_bottom = 0.059
+offset_right = -55.0
+offset_bottom = -56.0
+flat = true
+script = ExtResource("1_03f5t")
+part = ExtResource("2_ojb7v")
+metadata/_custom_type_script = "uid://cullam7o7pdt2"
+
+[node name="IconSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(32, 32)
+scale = Vector2(4, 4)
+texture = ExtResource("2_fjatc")
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ojb7v")
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+z_index = -1
+width = 4.0
+default_color = Color(0.321569, 0.286275, 0.321569, 1)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

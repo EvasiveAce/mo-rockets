@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=5 format=3 uid="uid://d3frcvnyvksk7"]
+
+[ext_resource type="Texture2D" uid="uid://ds5uiynxyl058" path="res://Rockets/BaseRocket/Sprites/Icons/BaseNoseBoughtIcon.png" id="1_1emh7"]
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="1_db2up"]
+[ext_resource type="Texture2D" uid="uid://dkfsbnm28uvhc" path="res://Rockets/BaseRocket/Sprites/Icons/BaseNoseIcon.png" id="2_xe38a"]
+[ext_resource type="Texture2D" uid="uid://wv3mg140fxnf" path="res://Rockets/BaseRocket/Sprites/BaseTop.png" id="3_61b46"]
+
+[resource]
+script = ExtResource("1_db2up")
+partType = 0
+statModifier1Name = 1
+statModifier1Amount = 0.1
+statModifier2Name = 0
+statModifier2Amount = 0.0
+partSprite = ExtResource("3_61b46")
+constantsName = "baseNoseUpgrade"
+boughtBool = true
+unlockedBool = true
+upgradeName = "Standard Nose"
+upgradeCost = 0
+upgradeDesc = "\"Aerodynamic and dependable\""
+upgradeInfo = "+0.1 Speed"
+iconSprite = ExtResource("2_xe38a")
+boughtSprite = ExtResource("1_1emh7")

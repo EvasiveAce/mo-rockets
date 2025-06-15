@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://doytka5l3afr3"]
+
+[ext_resource type="Script" uid="uid://bmae4j4xtvbtl" path="res://Common/World/RocketObject/Scripts/RocketBottom.gd" id="1"]
+
+[node name="RocketBottom" type="Node2D"]
+visible = false
+script = ExtResource("1")
+
+[node name="RocketBottomSprite" type="Sprite2D" parent="."]
+
+[node name="RocketLabelName" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 14.0

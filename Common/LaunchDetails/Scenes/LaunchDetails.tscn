@@ -1,0 +1,251 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmfsgbepk7eqh"]
+
+[ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="1_sh777"]
+
+[sub_resource type="FontFile" id="FontFile_1t3cl"]
+fallbacks = Array[Font]([ExtResource("1_sh777")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/128/0/ascent = 0.0
+cache/0/128/0/descent = 0.0
+cache/0/128/0/underline_position = 0.0
+cache/0/128/0/underline_thickness = 0.0
+cache/0/128/0/scale = 1.0
+cache/0/96/0/ascent = 0.0
+cache/0/96/0/descent = 0.0
+cache/0/96/0/underline_position = 0.0
+cache/0/96/0/underline_thickness = 0.0
+cache/0/96/0/scale = 1.0
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/112/0/ascent = 0.0
+cache/0/112/0/descent = 0.0
+cache/0/112/0/underline_position = 0.0
+cache/0/112/0/underline_thickness = 0.0
+cache/0/112/0/scale = 1.0
+cache/0/99/0/ascent = 0.0
+cache/0/99/0/descent = 0.0
+cache/0/99/0/underline_position = 0.0
+cache/0/99/0/underline_thickness = 0.0
+cache/0/99/0/scale = 1.0
+cache/0/72/0/ascent = 0.0
+cache/0/72/0/descent = 0.0
+cache/0/72/0/underline_position = 0.0
+cache/0/72/0/underline_thickness = 0.0
+cache/0/72/0/scale = 1.0
+cache/0/120/0/ascent = 0.0
+cache/0/120/0/descent = 0.0
+cache/0/120/0/underline_position = 0.0
+cache/0/120/0/underline_thickness = 0.0
+cache/0/120/0/scale = 1.0
+
+[sub_resource type="FontFile" id="FontFile_4w4vf"]
+fallbacks = Array[Font]([ExtResource("1_sh777")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+
+[node name="LaunchDetails" type="Node2D"]
+metadata/_edit_vertical_guides_ = [960.0]
+
+[node name="Control" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="RocketStats" type="Label" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 136.0
+offset_top = 8.0
+offset_right = 626.0
+offset_bottom = 80.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_1t3cl")
+theme_override_font_sizes/font_size = 64
+text = "Rocket Stats"
+
+[node name="Fuel" type="Label" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 164.0
+offset_top = 80.0
+offset_right = 458.0
+offset_bottom = 152.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_1t3cl")
+theme_override_font_sizes/font_size = 64
+text = "Fuel:"
+
+[node name="FuelValue" type="Label" parent="Control/Fuel"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 309.233
+offset_right = 393.233
+offset_bottom = 54.0
+theme_override_fonts/font = SubResource("FontFile_4w4vf")
+theme_override_font_sizes/font_size = 64
+
+[node name="Speed" type="Label" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 164.0
+offset_top = 152.0
+offset_right = 458.0
+offset_bottom = 224.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_1t3cl")
+theme_override_font_sizes/font_size = 64
+text = "Speed:"
+
+[node name="SpeedValue" type="Label" parent="Control/Speed"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 309.233
+offset_right = 393.233
+offset_bottom = 54.0
+theme_override_fonts/font = SubResource("FontFile_4w4vf")
+theme_override_font_sizes/font_size = 64
+
+[node name="Altitude" type="Label" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1120.0
+offset_top = 8.0
+offset_right = 1463.0
+offset_bottom = 80.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_1t3cl")
+theme_override_font_sizes/font_size = 64
+text = "Altitude:"
+
+[node name="AltitudeValue" type="Label" parent="Control/Altitude"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 376.0
+offset_right = 488.0
+offset_bottom = 72.0
+theme_override_fonts/font = SubResource("FontFile_4w4vf")
+theme_override_font_sizes/font_size = 64
+text = "0m"
+
+[node name="ResearchPointsAwarded" type="Label" parent="Control"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_top = 376.0
+offset_right = 1943.0
+offset_bottom = 520.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_1t3cl")
+theme_override_font_sizes/font_size = 96
+text = "Research Points Awarded"
+horizontal_alignment = 1
+
+[node name="ResearchPointValue" type="Label" parent="Control/ResearchPointsAwarded"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1955.0
+offset_top = 80.0
+offset_right = 4.0
+offset_bottom = 224.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_1t3cl")
+theme_override_font_sizes/font_size = 72
+text = "000"
+horizontal_alignment = 1
+
+[node name="Press" type="Label" parent="Control"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 120.0
+offset_top = 632.0
+offset_right = 1829.0
+offset_bottom = 776.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_1t3cl")
+theme_override_font_sizes/font_size = 128
+text = "Press Space to Launch"
+
+[node name="PressAssemble" type="Label" parent="Control"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_top = 784.0
+offset_right = 1951.0
+offset_bottom = 928.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_1t3cl")
+theme_override_font_sizes/font_size = 120
+text = "Press Space to Assemble"
+horizontal_alignment = 1

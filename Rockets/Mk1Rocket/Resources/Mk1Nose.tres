@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=5 format=3 uid="uid://b8s7p63bt13dj"]
+
+[ext_resource type="Texture2D" uid="uid://de2s0u1e2r84h" path="res://Rockets/Mk1Rocket/Sprites/Icons/Mk1NoseBoughtIcon.png" id="1_mc4bd"]
+[ext_resource type="Texture2D" uid="uid://cigvvkxdil5s4" path="res://Rockets/Mk1Rocket/Sprites/Mk1Nose.png" id="2_pwr5l"]
+[ext_resource type="Texture2D" uid="uid://bpigvio04burq" path="res://Rockets/Mk1Rocket/Sprites/Icons/Mk1NoseIcon.png" id="3_6mfky"]
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="4_x836s"]
+
+[resource]
+script = ExtResource("4_x836s")
+partType = 0
+constantsName = "mk1NoseUpgrade"
+boughtBool = false
+unlockedBool = false
+upgradeName = "Mark I Nose"
+upgradeCost = 5
+upgradeDesc = "\"The engineers found a shotty hubcap and added rocket fuel\""
+upgradeInfo = "+0.25 Fuel\\n-0.05 Speed"
+statModifier1Name = 2
+statModifier1Amount = 0.25
+statModifier2Name = 1
+statModifier2Amount = -0.05
+iconSprite = ExtResource("3_6mfky")
+boughtSprite = ExtResource("1_mc4bd")
+partSprite = ExtResource("2_pwr5l")
+metadata/_custom_type_script = "uid://uy4ow50n7icm"

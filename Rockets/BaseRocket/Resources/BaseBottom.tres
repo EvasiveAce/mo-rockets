@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=5 format=3 uid="uid://0b8nih5n6jeg"]
+
+[ext_resource type="Texture2D" uid="uid://sgbj8tg53bt0" path="res://Rockets/BaseRocket/Sprites/Icons/BaseBottomBoughtIcon.png" id="1_kg187"]
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="1_l8c8d"]
+[ext_resource type="Texture2D" uid="uid://brei18nh6xwju" path="res://Rockets/BaseRocket/Sprites/Icons/BaseBottomIcon.png" id="2_nl22g"]
+[ext_resource type="Texture2D" uid="uid://dqwg0ru2j5p5v" path="res://Rockets/BaseRocket/Sprites/BaseBottom.png" id="3_fh875"]
+
+[resource]
+script = ExtResource("1_l8c8d")
+partType = 2
+constantsName = "baseBottomUpgrade"
+boughtBool = true
+unlockedBool = true
+upgradeName = "Standard Bottom"
+upgradeCost = 0
+upgradeDesc = "\"Sturdy and tested\""
+upgradeInfo = "+0.1 Fuel"
+statModifier1Name = 2
+statModifier1Amount = 0.1
+statModifier2Name = 0
+statModifier2Amount = 0.0
+iconSprite = ExtResource("2_nl22g")
+boughtSprite = ExtResource("1_kg187")
+partSprite = ExtResource("3_fh875")

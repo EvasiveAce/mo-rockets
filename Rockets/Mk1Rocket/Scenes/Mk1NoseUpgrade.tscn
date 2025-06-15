@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://beyqif2og6dnl"]
+
+[ext_resource type="Script" uid="uid://b8c6u3d2ndxw4" path="res://Rockets/Mk1Rocket/Scripts/Mk1NoseUpgrade.gd" id="1_yvpuy"]
+[ext_resource type="Resource" uid="uid://b8s7p63bt13dj" path="res://Rockets/Mk1Rocket/Resources/Mk1Nose.tres" id="2_olqjk"]
+[ext_resource type="Texture2D" uid="uid://bpigvio04burq" path="res://Rockets/Mk1Rocket/Sprites/Icons/Mk1NoseIcon.png" id="3_7kif3"]
+[ext_resource type="AudioStream" uid="uid://88ryy4i3csdm" path="res://Upgrades/Sounds/UpgradeBought.wav" id="4_277yx"]
+
+[node name="Mk1Nose" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = -1
+anchor_right = 0.033
+anchor_bottom = 0.059
+offset_right = -55.36
+offset_bottom = -55.72
+flat = true
+script = ExtResource("1_yvpuy")
+part = ExtResource("2_olqjk")
+metadata/_custom_type_script = "uid://cullam7o7pdt2"
+
+[node name="IconSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(32, 32)
+scale = Vector2(4, 4)
+texture = ExtResource("3_7kif3")
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_277yx")
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+z_index = -1
+width = 4.0
+default_color = Color(0.321569, 0.286275, 0.321569, 1)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

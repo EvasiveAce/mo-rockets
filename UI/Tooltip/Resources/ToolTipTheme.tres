@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://badtmnjesntls"]
+
+[ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="1_qr3uu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1nyr"]
+bg_color = Color(0.211765, 0.211765, 0.211765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0352941, 0.0313726, 0.0352941, 1)
+
+[resource]
+default_font = ExtResource("1_qr3uu")
+default_font_size = 16
+PopupPanel/styles/panel = SubResource("StyleBoxFlat_t1nyr")

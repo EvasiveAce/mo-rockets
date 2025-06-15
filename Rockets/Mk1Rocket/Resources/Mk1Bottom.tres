@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=5 format=3 uid="uid://dtq1xm4vvh6vb"]
+
+[ext_resource type="Texture2D" uid="uid://6y8ixat4y3ei" path="res://Rockets/Mk1Rocket/Sprites/Icons/Mk1BottomBoughtIcon.png" id="1_444ll"]
+[ext_resource type="Texture2D" uid="uid://btu3s04itpw06" path="res://Rockets/Mk1Rocket/Sprites/Icons/Mk1BottomIcon.png" id="2_11aqu"]
+[ext_resource type="Texture2D" uid="uid://dgvxvlh8h82tm" path="res://Rockets/Mk1Rocket/Sprites/Mk1Bottom.png" id="3_7dur2"]
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="4_8kqy2"]
+
+[resource]
+script = ExtResource("4_8kqy2")
+partType = 2
+constantsName = "mk1BottomUpgrade"
+boughtBool = false
+unlockedBool = false
+upgradeName = "Mark I Bottom"
+upgradeCost = 5
+upgradeDesc = "\"It was born on its last legs\""
+upgradeInfo = "+0.3 Fuel\\n-0.1 Speed"
+statModifier1Name = 2
+statModifier1Amount = 0.3
+statModifier2Name = 1
+statModifier2Amount = -0.1
+iconSprite = ExtResource("2_11aqu")
+boughtSprite = ExtResource("1_444ll")
+partSprite = ExtResource("3_7dur2")
+metadata/_custom_type_script = "uid://uy4ow50n7icm"

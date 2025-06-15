@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=5 format=3 uid="uid://c63pet80optrd"]
+
+[ext_resource type="Texture2D" uid="uid://crlsn3etcstu8" path="res://Rockets/Mk1Rocket/Sprites/Icons/Mk1BodyBoughtIcon.png" id="1_rx12u"]
+[ext_resource type="Texture2D" uid="uid://b2wp233bcuvx" path="res://Rockets/Mk1Rocket/Sprites/Icons/Mk1BodyIcon.png" id="2_yjtn1"]
+[ext_resource type="Texture2D" uid="uid://cvntjld5yulqq" path="res://Rockets/Mk1Rocket/Sprites/Mk1Body.png" id="3_57be5"]
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="4_pruaa"]
+
+[resource]
+script = ExtResource("4_pruaa")
+partType = 1
+constantsName = "mk1BodyUpgrade"
+boughtBool = false
+unlockedBool = false
+upgradeName = "Mark I Body"
+upgradeCost = 5
+upgradeDesc = "\"It worked! ...at least once\""
+upgradeInfo = "+0.5 Fuel\\n-0.15 Speed"
+statModifier1Name = 2
+statModifier1Amount = 0.5
+statModifier2Name = 1
+statModifier2Amount = -0.15
+iconSprite = ExtResource("2_yjtn1")
+boughtSprite = ExtResource("1_rx12u")
+partSprite = ExtResource("3_57be5")
+metadata/_custom_type_script = "uid://uy4ow50n7icm"

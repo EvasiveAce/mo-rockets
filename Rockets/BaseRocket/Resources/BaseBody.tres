@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=5 format=3 uid="uid://c1emig3tf2i7q"]
+
+[ext_resource type="Texture2D" uid="uid://dfah07ychnbjf" path="res://Rockets/BaseRocket/Sprites/Icons/BaseBodyBoughtIcon.png" id="1_qo162"]
+[ext_resource type="Texture2D" uid="uid://cq0od8m17p51w" path="res://Rockets/BaseRocket/Sprites/Icons/BaseBodyIcon.png" id="2_e7ccf"]
+[ext_resource type="Texture2D" uid="uid://c5ywki3qhpnhm" path="res://Rockets/BaseRocket/Sprites/BaseBody.png" id="3_qlcnp"]
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="4_nf2qe"]
+
+[resource]
+script = ExtResource("4_nf2qe")
+partType = 1
+constantsName = "baseBodyUpgrade"
+boughtBool = true
+unlockedBool = true
+upgradeName = "Standard Body"
+upgradeCost = 0
+upgradeDesc = "\"Balanced and reliable\""
+upgradeInfo = "+0.1 Speed\\n+0.1 Fuel"
+statModifier1Name = 1
+statModifier1Amount = 0.1
+statModifier2Name = 2
+statModifier2Amount = 0.1
+iconSprite = ExtResource("2_e7ccf")
+boughtSprite = ExtResource("1_qo162")
+partSprite = ExtResource("3_qlcnp")

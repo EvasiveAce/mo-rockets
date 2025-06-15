@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc75u64l0hk7k"]
+
+[ext_resource type="Script" uid="uid://bjxifjhcumuw7" path="res://Rockets/BaseRocket/Scripts/BaseBodyUpgrade.gd" id="1_w6q83"]
+[ext_resource type="Resource" uid="uid://c1emig3tf2i7q" path="res://Rockets/BaseRocket/Resources/BaseBody.tres" id="2_66jt5"]
+[ext_resource type="Texture2D" uid="uid://cq0od8m17p51w" path="res://Rockets/BaseRocket/Sprites/Icons/BaseBodyIcon.png" id="2_sq71h"]
+[ext_resource type="AudioStream" uid="uid://88ryy4i3csdm" path="res://Upgrades/Sounds/UpgradeBought.wav" id="3_6dq4o"]
+
+[node name="BaseBodyUpgrade" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = -1
+anchor_right = 0.033
+anchor_bottom = 0.059
+offset_right = 0.639999
+offset_bottom = 0.279995
+flat = true
+script = ExtResource("1_w6q83")
+part = ExtResource("2_66jt5")
+metadata/_custom_type_script = "uid://cullam7o7pdt2"
+
+[node name="IconSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(32, 32)
+scale = Vector2(4, 4)
+texture = ExtResource("2_sq71h")
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6dq4o")
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+z_index = -1
+width = 4.0
+default_color = Color(0.321569, 0.286275, 0.321569, 1)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

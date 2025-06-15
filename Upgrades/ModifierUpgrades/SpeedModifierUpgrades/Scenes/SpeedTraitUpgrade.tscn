@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlu753lyvtiwd"]
+
+[ext_resource type="Script" uid="uid://bsi1hrthm506w" path="res://Upgrades/ModifierUpgrades/SpeedModifierUpgrades/Scripts/SpeedTraitUpgrade.gd" id="1_ja85r"]
+[ext_resource type="Resource" uid="uid://be3cg6rpnvpih" path="res://Upgrades/ModifierUpgrades/SpeedModifierUpgrades/Resources/SpeedTrait.tres" id="2_5tl6m"]
+[ext_resource type="Texture2D" uid="uid://djixqo5d0rwla" path="res://Upgrades/ModifierUpgrades/SpeedModifierUpgrades/Sprites/SpeedTraitUpgrade.png" id="2_cg285"]
+[ext_resource type="AudioStream" uid="uid://88ryy4i3csdm" path="res://Upgrades/Sounds/UpgradeBought.wav" id="3_gkyyu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3gcq2"]
+
+[node name="SpeedTraitUpgrade" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = -1
+anchor_right = 0.033
+anchor_bottom = 0.059
+offset_right = 0.639999
+offset_bottom = 0.279995
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3gcq2")
+flat = true
+script = ExtResource("1_ja85r")
+part = ExtResource("2_5tl6m")
+
+[node name="IconSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(32, 32)
+scale = Vector2(4, 4)
+texture = ExtResource("2_cg285")
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gkyyu")
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+z_index = -1
+width = 4.0
+default_color = Color(0.321569, 0.286275, 0.321569, 1)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,0 +1,454 @@
+[gd_scene load_steps=32 format=3 uid="uid://b0k8dqawn6up3"]
+
+[ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="1"]
+[ext_resource type="Script" uid="uid://cpntb1c2by1kf" path="res://Common/World/Scripts/World.gd" id="1_u70lu"]
+[ext_resource type="Texture2D" uid="uid://do0xy0tboiuxw" path="res://Common/World/Ground/Sprites/GroundSprite.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bsaqd1axd2erc" path="res://Common/AssemblyStage/Sprites/TransitionAnimation.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://du7lxf1rc60s6" path="res://Common/World/Ground/Sprites/RDBuilding.png" id="4_fgxwt"]
+[ext_resource type="Script" uid="uid://bnk3qv4kqpprp" path="res://Common/World/Ground/Scripts/GroundBuildingScript.gd" id="4_p88va"]
+[ext_resource type="Texture2D" uid="uid://b20iqhv62jxku" path="res://Common/World/Sprites/Parralax.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cnjwhhf5ij2m4" path="res://Common/World/Sprites/SkyBackground.png" id="6"]
+[ext_resource type="AudioStream" uid="uid://cht2ym8qgw68f" path="res://Common/World/Sounds/NoRecord.wav" id="7"]
+[ext_resource type="AudioStream" uid="uid://baftgwx4s2ao3" path="res://Common/World/Sounds/Record.wav" id="8"]
+[ext_resource type="Texture2D" uid="uid://clvyutum68j2d" path="res://Common/World/Sprites/TempUI.png" id="9_xygge"]
+[ext_resource type="PackedScene" uid="uid://kapeogwyt0w1" path="res://Common/ShopDetails/Scenes/ShopDetails.tscn" id="10_3do7r"]
+[ext_resource type="Texture2D" uid="uid://dykkl3f17f284" path="res://Common/World/Sprites/TempUIOverlay.png" id="11_efwql"]
+[ext_resource type="PackedScene" uid="uid://qxnero7cbs0m" path="res://Common/AssemblyStage/Scenes/AssemblyStage.tscn" id="13_kwl8l"]
+
+[sub_resource type="FontFile" id="3"]
+fallbacks = Array[Font]([ExtResource("1")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+
+[sub_resource type="AtlasTexture" id="4"]
+atlas = ExtResource("4")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="5"]
+atlas = ExtResource("4")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="6"]
+atlas = ExtResource("4")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="7"]
+atlas = ExtResource("4")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="8"]
+atlas = ExtResource("4")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="9"]
+atlas = ExtResource("4")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="10"]
+atlas = ExtResource("4")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="11"]
+atlas = ExtResource("4")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="12"]
+atlas = ExtResource("4")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="13"]
+atlas = ExtResource("4")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="14"]
+atlas = ExtResource("4")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="15"]
+atlas = ExtResource("4")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="SpriteFrames" id="16"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("4")
+}, {
+"duration": 1.0,
+"texture": SubResource("5")
+}, {
+"duration": 1.0,
+"texture": SubResource("6")
+}, {
+"duration": 1.0,
+"texture": SubResource("7")
+}, {
+"duration": 1.0,
+"texture": SubResource("8")
+}, {
+"duration": 1.0,
+"texture": SubResource("9")
+}],
+"loop": false,
+"name": &"TransitionIn",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("10")
+}, {
+"duration": 1.0,
+"texture": SubResource("11")
+}, {
+"duration": 1.0,
+"texture": SubResource("12")
+}, {
+"duration": 1.0,
+"texture": SubResource("13")
+}, {
+"duration": 1.0,
+"texture": SubResource("14")
+}, {
+"duration": 1.0,
+"texture": SubResource("15")
+}],
+"loop": false,
+"name": &"TransitionOut",
+"speed": 16.0
+}]
+
+[sub_resource type="FontFile" id="FontFile_pfeit"]
+fallbacks = Array[Font]([ExtResource("1")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/128/0/ascent = 0.0
+cache/0/128/0/descent = 0.0
+cache/0/128/0/underline_position = 0.0
+cache/0/128/0/underline_thickness = 0.0
+cache/0/128/0/scale = 1.0
+cache/0/96/0/ascent = 0.0
+cache/0/96/0/descent = 0.0
+cache/0/96/0/underline_position = 0.0
+cache/0/96/0/underline_thickness = 0.0
+cache/0/96/0/scale = 1.0
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/112/0/ascent = 0.0
+cache/0/112/0/descent = 0.0
+cache/0/112/0/underline_position = 0.0
+cache/0/112/0/underline_thickness = 0.0
+cache/0/112/0/scale = 1.0
+cache/0/99/0/ascent = 0.0
+cache/0/99/0/descent = 0.0
+cache/0/99/0/underline_position = 0.0
+cache/0/99/0/underline_thickness = 0.0
+cache/0/99/0/scale = 1.0
+cache/0/72/0/ascent = 0.0
+cache/0/72/0/descent = 0.0
+cache/0/72/0/underline_position = 0.0
+cache/0/72/0/underline_thickness = 0.0
+cache/0/72/0/scale = 1.0
+cache/0/120/0/ascent = 0.0
+cache/0/120/0/descent = 0.0
+cache/0/120/0/underline_position = 0.0
+cache/0/120/0/underline_thickness = 0.0
+cache/0/120/0/scale = 1.0
+
+[sub_resource type="FontFile" id="FontFile_e3i5d"]
+fallbacks = Array[Font]([ExtResource("1")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/128/0/ascent = 0.0
+cache/0/128/0/descent = 0.0
+cache/0/128/0/underline_position = 0.0
+cache/0/128/0/underline_thickness = 0.0
+cache/0/128/0/scale = 1.0
+cache/0/96/0/ascent = 0.0
+cache/0/96/0/descent = 0.0
+cache/0/96/0/underline_position = 0.0
+cache/0/96/0/underline_thickness = 0.0
+cache/0/96/0/scale = 1.0
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/112/0/ascent = 0.0
+cache/0/112/0/descent = 0.0
+cache/0/112/0/underline_position = 0.0
+cache/0/112/0/underline_thickness = 0.0
+cache/0/112/0/scale = 1.0
+cache/0/99/0/ascent = 0.0
+cache/0/99/0/descent = 0.0
+cache/0/99/0/underline_position = 0.0
+cache/0/99/0/underline_thickness = 0.0
+cache/0/99/0/scale = 1.0
+cache/0/72/0/ascent = 0.0
+cache/0/72/0/descent = 0.0
+cache/0/72/0/underline_position = 0.0
+cache/0/72/0/underline_thickness = 0.0
+cache/0/72/0/scale = 1.0
+cache/0/120/0/ascent = 0.0
+cache/0/120/0/descent = 0.0
+cache/0/120/0/underline_position = 0.0
+cache/0/120/0/underline_thickness = 0.0
+cache/0/120/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+
+[sub_resource type="FontFile" id="FontFile_eyw45"]
+fallbacks = Array[Font]([ExtResource("1")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_u70lu")
+metadata/_edit_vertical_guides_ = [1024.0, 1920.0, 1024.0, 1024.0, 1024.0, 1472.0]
+
+[node name="RocketSubview" type="SubViewportContainer" parent="."]
+offset_left = 816.0
+offset_right = 2188.0
+offset_bottom = 1080.0
+
+[node name="SubViewport" type="SubViewport" parent="RocketSubview"]
+handle_input_locally = false
+size = Vector2i(1372, 1080)
+render_target_update_mode = 4
+
+[node name="SkyBackground" type="Sprite2D" parent="RocketSubview/SubViewport"]
+texture_filter = 1
+position = Vector2(960, -540)
+texture = ExtResource("6")
+
+[node name="Ground" type="Sprite2D" parent="RocketSubview/SubViewport"]
+texture_filter = 1
+position = Vector2(656, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("2")
+script = ExtResource("4_p88va")
+
+[node name="RDBuilding" type="Sprite2D" parent="RocketSubview/SubViewport/Ground"]
+visible = false
+texture_filter = 1
+position = Vector2(-94, 26)
+texture = ExtResource("4_fgxwt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="RocketSubview/SubViewport"]
+
+[node name="Record" type="Label" parent="RocketSubview/SubViewport/CanvasLayer"]
+visible = false
+texture_filter = 1
+offset_left = 720.0
+offset_top = 342.0
+offset_right = 1206.0
+offset_bottom = 486.0
+theme_override_fonts/font = SubResource("3")
+theme_override_font_sizes/font_size = 32
+text = "NEW RECORD"
+
+[node name="MultiplierIncrease" type="Label" parent="RocketSubview/SubViewport/CanvasLayer/Record"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -103.0
+offset_top = 90.0
+offset_right = 584.0
+offset_bottom = 234.0
+theme_override_fonts/font = SubResource("3")
+theme_override_font_sizes/font_size = 32
+text = "Stats Increased"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="RocketSubview/SubViewport/CanvasLayer"]
+
+[node name="Sky" type="Sprite2D" parent="RocketSubview/SubViewport/CanvasLayer/ParallaxBackground"]
+texture_filter = 1
+position = Vector2(960, 540)
+texture = ExtResource("5")
+
+[node name="RocketControl" type="Node2D" parent="RocketSubview/SubViewport"]
+
+[node name="AssemblyAnimationSprite" type="AnimatedSprite2D" parent="RocketSubview/SubViewport"]
+visible = false
+texture_filter = 1
+position = Vector2(960, 540)
+sprite_frames = SubResource("16")
+animation = &"TransitionIn"
+
+[node name="AnimationTimer" type="Timer" parent="RocketSubview/SubViewport"]
+one_shot = true
+
+[node name="Record" type="AudioStreamPlayer" parent="RocketSubview/SubViewport"]
+stream = ExtResource("8")
+pitch_scale = 0.75
+
+[node name="NoRecord" type="AudioStreamPlayer" parent="RocketSubview/SubViewport"]
+stream = ExtResource("7")
+
+[node name="Camera2D" type="Camera2D" parent="RocketSubview/SubViewport"]
+position = Vector2(960, 412)
+enabled = false
+
+[node name="TempUI" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("9_xygge")
+
+[node name="ShopViewport" type="SubViewportContainer" parent="."]
+offset_right = 1008.0
+offset_bottom = 512.0
+
+[node name="SubViewport" type="SubViewport" parent="ShopViewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1008, 512)
+render_target_update_mode = 4
+
+[node name="ShopDetails" parent="ShopViewport/SubViewport" instance=ExtResource("10_3do7r")]
+
+[node name="AssemblyViewport" type="SubViewportContainer" parent="."]
+offset_left = -22.0
+offset_top = 544.0
+offset_right = 1873.0
+offset_bottom = 1624.0
+scale = Vector2(0.55, 0.55)
+
+[node name="SubViewport" type="SubViewport" parent="AssemblyViewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1895, 1080)
+render_target_update_mode = 4
+
+[node name="AssemblyNose" parent="AssemblyViewport/SubViewport" instance=ExtResource("13_kwl8l")]
+
+[node name="TempUIAbove" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(960, 544)
+scale = Vector2(4, 4)
+texture = ExtResource("11_efwql")
+
+[node name="RocketShop" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = -6.0
+offset_right = 500.0
+offset_bottom = 66.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_pfeit")
+theme_override_font_sizes/font_size = 64
+text = "Rocket Shop"
+
+[node name="Research" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 663.0
+offset_bottom = 128.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_e3i5d")
+theme_override_font_sizes/font_size = 48
+text = "Research Points:"
+
+[node name="ResearchValue" type="Label" parent="Research"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 496.0
+offset_right = 580.0
+offset_bottom = 72.0
+theme_override_fonts/font = SubResource("FontFile_eyw45")
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[connection signal="mouse_entered" from="ShopViewport" to="ShopViewport/SubViewport/ShopDetails" method="_on_shop_viewport_mouse_entered"]
+[connection signal="mouse_exited" from="ShopViewport" to="ShopViewport/SubViewport/ShopDetails" method="_on_shop_viewport_mouse_exited"]

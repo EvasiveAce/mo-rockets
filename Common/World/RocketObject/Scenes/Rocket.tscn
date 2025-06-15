@@ -1,0 +1,104 @@
+[gd_scene load_steps=8 format=3 uid="uid://ijho3gmbvbmx"]
+
+[ext_resource type="Script" uid="uid://dh4aah4psqov3" path="res://Common/World/RocketObject/Scripts/Rocket.gd" id="2"]
+[ext_resource type="AudioStream" uid="uid://bkmjmi5godufv" path="res://Common/World/RocketObject/Sounds/Rocket.wav" id="5"]
+[ext_resource type="AudioStream" uid="uid://cqi8ha02ieacf" path="res://Common/World/RocketObject/Sounds/RocketStart.wav" id="6"]
+
+[sub_resource type="CapsuleShape2D" id="1"]
+radius = 29.8885
+height = 59.777
+
+[sub_resource type="ParticleProcessMaterial" id="2"]
+lifetime_randomness = 1.0
+emission_shape_offset = Vector3(0, 1.025, 0)
+emission_shape = 2
+emission_sphere_radius = 2.5
+inherit_velocity_ratio = 0.2
+spread = 160.0
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+radial_velocity_min = 1.0
+radial_velocity_max = 25.0
+gravity = Vector3(0, 50, 0)
+scale_max = 3.0
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
+
+[sub_resource type="CapsuleShape2D" id="3"]
+radius = 29.8885
+height = 59.777
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_giiy7"]
+lifetime_randomness = 0.35
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 7.25
+inherit_velocity_ratio = 0.36
+radial_velocity_min = 397.85
+radial_velocity_max = 397.85
+gravity = Vector3(0, 0, 0)
+scale_max = 4.0
+color = Color(1, 0, 0, 1)
+hue_variation_min = -0.15
+hue_variation_max = 0.15
+
+[node name="Rocket" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("2")
+
+[node name="RocketArea" type="Area2D" parent="."]
+
+[node name="RocketAreaCollision" type="CollisionShape2D" parent="RocketArea"]
+shape = SubResource("1")
+
+[node name="RocketParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0, 22)
+emitting = false
+amount = 555
+lifetime = 2.0
+preprocess = 10.0
+speed_scale = 2.5
+randomness = 1.0
+process_material = SubResource("2")
+
+[node name="TopSprite" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, -38)
+scale = Vector2(4, 4)
+
+[node name="BodySprite" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(4, 4)
+
+[node name="BottomSprite" type="Sprite2D" parent="."]
+position = Vector2(0, 22)
+scale = Vector2(4, 4)
+
+[node name="RocketCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("3")
+
+[node name="RocketTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="Rocket" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5")
+volume_db = -20.0
+pitch_scale = 2.05
+
+[node name="RocketLaunch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6")
+pitch_scale = 0.5
+
+[node name="RocketExplodeParticles" type="GPUParticles2D" parent="."]
+modulate = Color(1, 0.583333, 0, 1)
+emitting = false
+amount = 100
+one_shot = true
+explosiveness = 0.8
+randomness = 0.65
+trail_sections = 2
+trail_section_subdivisions = 1
+process_material = SubResource("ParticleProcessMaterial_giiy7")
+
+[connection signal="timeout" from="RocketTimer" to="." method="_on_RocketTimer_timeout"]

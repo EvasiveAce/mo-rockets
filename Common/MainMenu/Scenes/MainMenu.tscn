@@ -1,0 +1,179 @@
+[gd_scene load_steps=20 format=3 uid="uid://b11l3imu0g6p1"]
+
+[ext_resource type="Script" uid="uid://bwrf6rwjiu0nw" path="res://Common/MainMenu/Scripts/MainMenu.gd" id="1_rtvn0"]
+[ext_resource type="Texture2D" uid="uid://ddq5k3eiwq2v3" path="res://Common/MainMenu/Sprites/TitleScreen.png" id="2_4sgky"]
+[ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="3_aui2q"]
+[ext_resource type="Texture2D" uid="uid://bsaqd1axd2erc" path="res://Common/AssemblyStage/Sprites/TransitionAnimation.png" id="4_sseev"]
+
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("3_aui2q")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+
+[sub_resource type="FontFile" id="2"]
+fallbacks = Array[Font]([ExtResource("3_aui2q")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+
+[sub_resource type="AtlasTexture" id="3"]
+atlas = ExtResource("4_sseev")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="4"]
+atlas = ExtResource("4_sseev")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="5"]
+atlas = ExtResource("4_sseev")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="6"]
+atlas = ExtResource("4_sseev")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="7"]
+atlas = ExtResource("4_sseev")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="8"]
+atlas = ExtResource("4_sseev")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="9"]
+atlas = ExtResource("4_sseev")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="10"]
+atlas = ExtResource("4_sseev")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="11"]
+atlas = ExtResource("4_sseev")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="12"]
+atlas = ExtResource("4_sseev")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="13"]
+atlas = ExtResource("4_sseev")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="14"]
+atlas = ExtResource("4_sseev")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="SpriteFrames" id="15"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("3")
+}, {
+"duration": 1.0,
+"texture": SubResource("4")
+}, {
+"duration": 1.0,
+"texture": SubResource("5")
+}, {
+"duration": 1.0,
+"texture": SubResource("6")
+}, {
+"duration": 1.0,
+"texture": SubResource("7")
+}, {
+"duration": 1.0,
+"texture": SubResource("8")
+}],
+"loop": false,
+"name": &"TransitionIn",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("9")
+}, {
+"duration": 1.0,
+"texture": SubResource("10")
+}, {
+"duration": 1.0,
+"texture": SubResource("11")
+}, {
+"duration": 1.0,
+"texture": SubResource("12")
+}, {
+"duration": 1.0,
+"texture": SubResource("13")
+}, {
+"duration": 1.0,
+"texture": SubResource("14")
+}],
+"loop": false,
+"name": &"TransitionOut",
+"speed": 16.0
+}]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_rtvn0")
+
+[node name="TitleScreenSprite" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("2_4sgky")
+
+[node name="Altitude" type="Label" parent="."]
+texture_filter = 1
+offset_left = 768.0
+offset_top = 496.0
+offset_right = 1008.0
+offset_bottom = 525.0
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
+text = "Record Altitude:"
+
+[node name="AltitudeValue" type="Label" parent="Altitude"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 350.0
+offset_right = 407.0
+offset_bottom = 36.0
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
+text = "0.0"
+
+[node name="Space" type="Label" parent="."]
+texture_filter = 1
+offset_left = 744.0
+offset_top = 560.0
+offset_right = 1178.0
+offset_bottom = 596.0
+theme_override_fonts/font = SubResource("2")
+theme_override_font_sizes/font_size = 32
+text = "Press Space to LAUNCH"
+
+[node name="AssemblyAnimationSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(960, 540)
+sprite_frames = SubResource("15")
+animation = &"TransitionIn"

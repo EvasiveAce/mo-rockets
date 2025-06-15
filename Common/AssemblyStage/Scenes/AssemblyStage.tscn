@@ -1,0 +1,448 @@
+[gd_scene load_steps=27 format=3 uid="uid://qxnero7cbs0m"]
+
+[ext_resource type="Script" uid="uid://dloqy18gryvsq" path="res://Common/AssemblyStage/Scripts/AssemblyStage.gd" id="1_32laq"]
+[ext_resource type="Texture2D" uid="uid://du1nxag3ftwtw" path="res://Common/AssemblyStage/Sprites/AssemblyScreen.png" id="2_uiam2"]
+[ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="3_58o86"]
+[ext_resource type="Texture2D" uid="uid://wv3mg140fxnf" path="res://Rockets/BaseRocket/Sprites/BaseTop.png" id="4_yl7ng"]
+[ext_resource type="LabelSettings" uid="uid://dthi5p7rrfg2g" path="res://Data/Resources/LabelSettings.tres" id="5_uiam2"]
+[ext_resource type="Texture2D" uid="uid://bsaqd1axd2erc" path="res://Common/AssemblyStage/Sprites/TransitionAnimation.png" id="5_x1dtc"]
+[ext_resource type="AudioStream" uid="uid://b7uty4rtr35a3" path="res://Common/AssemblyStage/Sounds/Select.wav" id="6_k7u16"]
+
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("3_58o86")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="2"]
+
+[sub_resource type="FontFile" id="3"]
+fallbacks = Array[Font]([ExtResource("3_58o86")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+
+[sub_resource type="FontFile" id="4"]
+fallbacks = Array[Font]([ExtResource("3_58o86")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+
+[sub_resource type="StyleBoxEmpty" id="5"]
+
+[sub_resource type="StyleBoxEmpty" id="6"]
+
+[sub_resource type="AtlasTexture" id="7"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="8"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="9"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="10"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="11"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="12"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="13"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="14"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="15"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="16"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="17"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="18"]
+atlas = ExtResource("5_x1dtc")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="SpriteFrames" id="19"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("7")
+}, {
+"duration": 1.0,
+"texture": SubResource("8")
+}, {
+"duration": 1.0,
+"texture": SubResource("9")
+}, {
+"duration": 1.0,
+"texture": SubResource("10")
+}, {
+"duration": 1.0,
+"texture": SubResource("11")
+}, {
+"duration": 1.0,
+"texture": SubResource("12")
+}],
+"loop": false,
+"name": &"TransitionIn",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("13")
+}, {
+"duration": 1.0,
+"texture": SubResource("14")
+}, {
+"duration": 1.0,
+"texture": SubResource("15")
+}, {
+"duration": 1.0,
+"texture": SubResource("16")
+}, {
+"duration": 1.0,
+"texture": SubResource("17")
+}, {
+"duration": 1.0,
+"texture": SubResource("18")
+}],
+"loop": false,
+"name": &"TransitionOut",
+"speed": 16.0
+}]
+
+[node name="Assembly" type="Node2D"]
+script = ExtResource("1_32laq")
+
+[node name="AssemblySprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(961, 531)
+texture = ExtResource("2_uiam2")
+
+[node name="AssemblyLabel" type="Label" parent="."]
+texture_filter = 1
+offset_left = 95.0
+offset_top = 28.0
+offset_right = 2015.0
+offset_bottom = 147.0
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 64
+text = "CHOOSE A"
+
+[node name="AssemblyButton1" type="Button" parent="."]
+visible = false
+texture_filter = 1
+offset_left = 144.189
+offset_top = 148.0
+offset_right = 532.189
+offset_bottom = 524.0
+theme_override_styles/hover = SubResource("2")
+action_mode = 0
+icon = ExtResource("4_yl7ng")
+flat = true
+expand_icon = true
+
+[node name="AssemblyNameBox" type="VBoxContainer" parent="AssemblyButton1"]
+texture_filter = 1
+layout_mode = 0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = 222.0
+offset_right = -102.0
+offset_bottom = 369.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="AssemblyTrait1" type="Label" parent="AssemblyButton1/AssemblyNameBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("3")
+theme_override_font_sizes/font_size = 32
+text = "TEST"
+
+[node name="AssemblyTrait2" type="Label" parent="AssemblyButton1/AssemblyNameBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("3")
+theme_override_font_sizes/font_size = 32
+text = "TEST"
+
+[node name="AssemblyStatsBox" type="VBoxContainer" parent="AssemblyButton1"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 286.0
+offset_top = 410.0
+offset_right = 388.0
+offset_bottom = 557.0
+mouse_filter = 2
+
+[node name="AssemblyStats1" type="Label" parent="AssemblyButton1/AssemblyStatsBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("4")
+theme_override_font_sizes/font_size = 32
+text = "0.0"
+
+[node name="AssemblyStats2" type="Label" parent="AssemblyButton1/AssemblyStatsBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("4")
+theme_override_font_sizes/font_size = 32
+text = "0.0"
+
+[node name="AssemblyButton2" type="Button" parent="."]
+texture_filter = 1
+offset_left = 768.481
+offset_top = 148.0
+offset_right = 1156.48
+offset_bottom = 524.0
+theme_override_styles/hover = SubResource("5")
+action_mode = 0
+icon = ExtResource("4_yl7ng")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Name" type="Label" parent="AssemblyButton2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -12.5
+offset_top = 400.0
+offset_right = 399.5
+offset_bottom = 485.0
+theme_override_fonts/font = ExtResource("3_58o86")
+theme_override_font_sizes/font_size = 32
+text = "Standard Nose Sluggish"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="AssemblyNameBox" type="VBoxContainer" parent="AssemblyButton2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 21.0
+offset_top = 486.0
+offset_right = 21.0
+offset_bottom = 602.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="AssemblyTrait1" type="Label" parent="AssemblyButton2/AssemblyNameBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("3")
+theme_override_font_sizes/font_size = 32
+text = "TEST"
+label_settings = ExtResource("5_uiam2")
+
+[node name="AssemblyTrait2" type="Label" parent="AssemblyButton2/AssemblyNameBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("3")
+theme_override_font_sizes/font_size = 32
+text = "TEST"
+
+[node name="AssemblyStatsBox" type="VBoxContainer" parent="AssemblyButton2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 286.0
+offset_top = 486.0
+offset_right = 286.0
+offset_bottom = 602.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="AssemblyStats1" type="Label" parent="AssemblyButton2/AssemblyStatsBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("4")
+theme_override_font_sizes/font_size = 32
+text = "0.0"
+
+[node name="AssemblyStats2" type="Label" parent="AssemblyButton2/AssemblyStatsBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("4")
+theme_override_font_sizes/font_size = 32
+text = "0.0"
+
+[node name="AssemblyButton3" type="Button" parent="."]
+visible = false
+texture_filter = 1
+offset_left = 1388.27
+offset_top = 148.0
+offset_right = 1776.27
+offset_bottom = 524.0
+theme_override_styles/hover = SubResource("6")
+action_mode = 0
+icon = ExtResource("4_yl7ng")
+flat = true
+expand_icon = true
+
+[node name="AssemblyNameBox" type="VBoxContainer" parent="AssemblyButton3"]
+texture_filter = 1
+layout_mode = 0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = 222.0
+offset_right = -102.0
+offset_bottom = 369.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="AssemblyTrait1" type="Label" parent="AssemblyButton3/AssemblyNameBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("3")
+theme_override_font_sizes/font_size = 32
+text = "TEST"
+
+[node name="AssemblyTrait2" type="Label" parent="AssemblyButton3/AssemblyNameBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("3")
+theme_override_font_sizes/font_size = 32
+text = "TEST"
+
+[node name="AssemblyStatsBox" type="VBoxContainer" parent="AssemblyButton3"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 286.0
+offset_top = 410.0
+offset_right = 388.0
+offset_bottom = 557.0
+mouse_filter = 2
+
+[node name="AssemblyStats1" type="Label" parent="AssemblyButton3/AssemblyStatsBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("4")
+theme_override_font_sizes/font_size = 32
+text = "0.0"
+
+[node name="AssemblyStats2" type="Label" parent="AssemblyButton3/AssemblyStatsBox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("4")
+theme_override_font_sizes/font_size = 32
+text = "0.0"
+
+[node name="AssemblyAnimationSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(960, 540)
+sprite_frames = SubResource("19")
+animation = &"TransitionIn"
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_k7u16")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="pressed" from="AssemblyButton1" to="." method="_on_AssemblyButton1_pressed"]
+[connection signal="mouse_entered" from="AssemblyButton2" to="." method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="AssemblyButton2" to="." method="_on_Button_mouse_exited"]
+[connection signal="pressed" from="AssemblyButton2" to="." method="_on_AssemblyButton2_pressed"]
+[connection signal="pressed" from="AssemblyButton3" to="." method="_on_AssemblyButton3_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

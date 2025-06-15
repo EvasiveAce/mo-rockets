@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfap5unii4o4u"]
+
+[ext_resource type="Script" uid="uid://bnfo20sb3e3kt" path="res://Common/World/RocketObject/Scripts/RocketNose.gd" id="1"]
+
+[node name="RocketNose" type="Node2D"]
+visible = false
+script = ExtResource("1")
+
+[node name="RocketNoseSprite" type="Sprite2D" parent="."]
+
+[node name="RocketLabelName" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 14.0

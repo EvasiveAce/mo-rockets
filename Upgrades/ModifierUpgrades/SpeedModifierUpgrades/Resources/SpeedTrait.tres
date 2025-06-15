@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="UpgradePart" load_steps=9 format=3 uid="uid://be3cg6rpnvpih"]
+
+[ext_resource type="Texture2D" uid="uid://di7pcptufhjky" path="res://Upgrades/ModifierUpgrades/SpeedModifierUpgrades/Sprites/SpeedTraitUpgradeBought.png" id="1_ltlwr"]
+[ext_resource type="Texture2D" uid="uid://djixqo5d0rwla" path="res://Upgrades/ModifierUpgrades/SpeedModifierUpgrades/Sprites/SpeedTraitUpgrade.png" id="2_dx0aw"]
+[ext_resource type="Script" uid="uid://bu2nlniaggkea" path="res://Data/Modifiers/Scripts/Modifier.gd" id="3_k7ct4"]
+[ext_resource type="Resource" uid="uid://8fmx0hyhoeac" path="res://Data/Modifiers/SpeedModifiers/Bulky.tres" id="4_jy6u6"]
+[ext_resource type="Resource" uid="uid://dn41gmouk34w4" path="res://Data/Modifiers/SpeedModifiers/Sluggish.tres" id="5_jthxn"]
+[ext_resource type="Resource" uid="uid://m5qf0d7xsu67" path="res://Data/Modifiers/SpeedModifiers/Quick.tres" id="6_ltlwr"]
+[ext_resource type="Resource" uid="uid://n0cwini3hpj2" path="res://Data/Modifiers/SpeedModifiers/Swift.tres" id="7_jf8wk"]
+[ext_resource type="Script" uid="uid://8usv0vhqicv1" path="res://Upgrades/Scripts/UpgradePart.gd" id="8_ltlwr"]
+
+[resource]
+script = ExtResource("8_ltlwr")
+modifiersToAdd = Array[ExtResource("3_k7ct4")]([ExtResource("4_jy6u6"), ExtResource("5_jthxn"), ExtResource("6_ltlwr"), ExtResource("7_jf8wk")])
+constantsName = "speedTraitUpgrade"
+boughtBool = false
+unlockedBool = true
+upgradeName = "Speed Trait I"
+upgradeCost = 2
+upgradeDesc = "\"Things... just got a bit faster\""
+upgradeInfo = "Unlocks 4 speed related part modifiers:/nBulky/nSluggish/nStreamlined/nSwift"
+iconSprite = ExtResource("2_dx0aw")
+boughtSprite = ExtResource("1_ltlwr")
+metadata/_custom_type_script = "uid://8usv0vhqicv1"
