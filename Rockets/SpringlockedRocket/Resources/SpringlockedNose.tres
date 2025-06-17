@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=5 format=3 uid="uid://bb82y310ujkkx"]
+
+[ext_resource type="Texture2D" uid="uid://dwxi8gwp2ua51" path="res://Rockets/SpringlockedRocket/Sprites/SpringlockedNose.png" id="1_5im2h"]
+[ext_resource type="Texture2D" uid="uid://d4hmjxoo3u1iq" path="res://Rockets/SpringlockedRocket/Sprites/Icons/SpringlockedNoseBoughtIcon.png" id="1_yopa2"]
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="1_ysd55"]
+[ext_resource type="Texture2D" uid="uid://bx73j17rcyvlx" path="res://Rockets/SpringlockedRocket/Sprites/Icons/SpringlockedNoseIcon.png" id="2_gv6iv"]
+
+[resource]
+script = ExtResource("1_ysd55")
+partType = 0
+statModifier1Name = 1
+statModifier1Amount = 0.3
+statModifier2Name = 2
+statModifier2Amount = -0.1
+partSprite = ExtResource("1_5im2h")
+constantsName = "springlockedNoseUpgrade"
+boughtBool = false
+unlockedBool = false
+upgradeName = "Springlocked Nose"
+upgradeCost = 10
+upgradeDesc = "\"This thing is leaking\""
+upgradeInfo = "+0.3 Speed\\n-0.1 Fuel"
+iconSprite = ExtResource("2_gv6iv")
+boughtSprite = ExtResource("1_yopa2")
+metadata/_custom_type_script = "uid://uy4ow50n7icm"

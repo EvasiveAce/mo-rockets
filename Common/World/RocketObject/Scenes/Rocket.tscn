@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ijho3gmbvbmx"]
+[gd_scene load_steps=11 format=3 uid="uid://ijho3gmbvbmx"]
 
 [ext_resource type="Script" uid="uid://dh4aah4psqov3" path="res://Common/World/RocketObject/Scripts/Rocket.gd" id="2"]
+[ext_resource type="AudioStream" uid="uid://tihhnol4duf5" path="res://Common/World/RocketObject/Sounds/RocketExplodeLowFuel.wav" id="4_o3vb1"]
 [ext_resource type="AudioStream" uid="uid://bkmjmi5godufv" path="res://Common/World/RocketObject/Sounds/Rocket.wav" id="5"]
+[ext_resource type="AudioStream" uid="uid://eh5ss2r6fpm5" path="res://Common/World/RocketObject/Sounds/RocketExplodeMediumFuel.wav" id="5_x3o3d"]
 [ext_resource type="AudioStream" uid="uid://cqi8ha02ieacf" path="res://Common/World/RocketObject/Sounds/RocketStart.wav" id="6"]
+[ext_resource type="AudioStream" uid="uid://ccqdawhlsfshp" path="res://Common/World/RocketObject/Sounds/RocketExplodeHigh.wav" id="6_xxx01"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 29.8885
@@ -100,5 +103,14 @@ randomness = 0.65
 trail_sections = 2
 trail_section_subdivisions = 1
 process_material = SubResource("ParticleProcessMaterial_giiy7")
+
+[node name="RocketExplodeLow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_o3vb1")
+
+[node name="RocketExplodeMedium" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_x3o3d")
+
+[node name="RocketExplodeHigh" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_xxx01")
 
 [connection signal="timeout" from="RocketTimer" to="." method="_on_RocketTimer_timeout"]

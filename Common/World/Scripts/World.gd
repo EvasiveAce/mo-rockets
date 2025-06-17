@@ -25,12 +25,26 @@ var rocket
 var camera2D
 @onready var rocketAssembled = false
 
+var shake_amount = 0.0
+var shake_decay = 0.05
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.stage_finished.connect(_stage_finished)
 
+func _screen_shake():
+	if camera2D and shake_amount > 0.0:
+		shake_amount = max(shake_amount - shake_decay, 0.0)
+		var shake_offset = Vector2(randf() - 0.5, randf() - 0.5) * shake_amount * 10.0
+		camera2D.offset = shake_offset
+	elif camera2D:
+		camera2D.offset = Vector2.ZERO
+
 func _process(_delta):
+
+	_screen_shake()
+
 	$Research/ResearchValue.text = str(Constants.research)
 
 	if Constants.automation1Upgrade and !$AutomationToggle.visible:
@@ -54,6 +68,7 @@ func _process(_delta):
 		if (Input.is_action_just_released("ui_accept") and firstTime) or (Constants.automation1 and firstTime):
 			get_node("AssemblyViewport/SubViewport/LaunchDetails/Control/Press").hide()
 			rocket._blastOff()
+			shake_amount = 3.5
 			firstTime = false
 		_endGame()
 		if !endEngaged:
@@ -62,7 +77,7 @@ func _process(_delta):
 				get_node("AssemblyViewport/SubViewport/LaunchDetails/Control/ResearchPointsAwarded").show()
 				get_node("AssemblyViewport/SubViewport/LaunchDetails/Control/ResearchPointsAwarded/ResearchPointValue").text = str(snapped((Constants.altitude / 100), 1))
 			if Input.is_action_just_pressed("ui_accept") or Constants.automation1:
-				Constants.research += snapped((Constants.altitude / 100), 1)
+				
 				$AssemblyViewport/SubViewport.remove_child($AssemblyViewport/SubViewport/LaunchDetails)
 				endEngaged = true
 				firstTime = true
@@ -136,6 +151,7 @@ func _endGame():
 			Constants.highestAltitude = Constants.altitude
 		endEngaged = false
 		rocket._explode()
+		Constants.research += snapped((Constants.altitude / 100), 1)
 
 
 # func _on_automation_toggle_toggled(toggled_on:bool) -> void:

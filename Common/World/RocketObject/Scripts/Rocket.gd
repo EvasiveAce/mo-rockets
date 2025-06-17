@@ -17,6 +17,8 @@ var bottomModulate
 
 
 @export var fuelToUse: float = 0.0
+var fuelToRecord: float = 0.0
+
 @export var speedToUse: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
@@ -65,6 +67,7 @@ func _setUp():
 	speedToUse = Constants.defaultSpeed + Constants.speed
 	speedToUse = snappedf(speedToUse, 0.01)
 	fuelToUse = snappedf(fuelToUse, 0.01)
+	fuelToRecord = fuelToUse
 	timer.wait_time = fuelToUse
 	Constants.speed = 0.0
 	Constants.fuel = 0.0
@@ -74,6 +77,15 @@ func _on_RocketTimer_timeout():
 	fuelToUse = 0.0
 
 func _explode():
+	if fuelToRecord > 10.0:
+		$RocketExplodeParticles.amount = 100
+		$RocketExplodeHigh.play()
+	elif fuelToRecord >= 2.5 and fuelToRecord < 10.0:
+		$RocketExplodeParticles.amount = 50
+		$RocketExplodeMedium.play()
+	else:
+		$RocketExplodeParticles.amount = 25
+		$RocketExplodeLow.play()
 	$TopSprite.visible = false
 	$BodySprite.visible = false
 	$BottomSprite.visible = false

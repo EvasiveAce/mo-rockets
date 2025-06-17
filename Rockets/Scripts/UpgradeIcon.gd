@@ -8,7 +8,7 @@ extends Button
 func _ready() -> void:
 	if part.boughtBool:
 		$IconSprite.texture = part.boughtSprite
-	else:
+	elif part.unlockedBool:
 		$IconSprite.texture = part.iconSprite
 
 	if get_parent() is UpgradeIcon:
@@ -27,7 +27,13 @@ func _on_mouse_exited() -> void:
 	$IconSprite.scale.y = 4
 
 func _process(_delta: float) -> void:
-	if get_parent() != null:
-		if !part.boughtBool:
-			part.unlockedBool = true
-			$IconSprite.texture = part.iconSprite
+	if get_parent() != null and get_parent() is UpgradeIcon:
+		var parent_part = get_parent().part
+		if !parent_part.boughtBool:
+			# Parent not bought, stay locked
+			return
+
+	# Parent is bought or no parent – proceed to unlock if applicable
+	if !part.boughtBool:
+		part.unlockedBool = true
+		$IconSprite.texture = part.iconSprite

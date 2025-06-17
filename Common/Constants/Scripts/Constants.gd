@@ -30,6 +30,11 @@ var mk1NoseUpgrade = false
 var mk1BodyUpgrade = false
 var mk1BottomUpgrade = false
 
+# Springlocked Rocket
+var springlockedNoseUpgrade = false
+var springlockedBodyUpgrade = false
+var springlockedBottomUpgrade = false
+
 # Modifier Upgrades
 var speedTraitUpgrade
 var fuelTraitUpgrade

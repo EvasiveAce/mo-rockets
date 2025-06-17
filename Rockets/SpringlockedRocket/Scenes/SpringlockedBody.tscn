@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmqem4v068vvo"]
+
+[ext_resource type="Script" uid="uid://vu3xkd7bds1r" path="res://Rockets/SpringlockedRocket/Scripts/SpringlockedBody.gd" id="1_0h8uj"]
+[ext_resource type="Texture2D" uid="uid://bf0fujsnjsen0" path="res://Upgrades/Sprites/LockedIcon.png" id="2_0cok4"]
+[ext_resource type="Resource" uid="uid://b33c6ir2rndeo" path="res://Rockets/SpringlockedRocket/Resources/SpringlockedBody.tres" id="2_06alk"]
+[ext_resource type="AudioStream" uid="uid://88ryy4i3csdm" path="res://Upgrades/Sounds/UpgradeBought.wav" id="3_06alk"]
+
+[node name="SpringlockedBody" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = -1
+anchor_right = 0.033
+anchor_bottom = 0.059
+offset_right = 0.639999
+offset_bottom = 0.279995
+flat = true
+script = ExtResource("1_0h8uj")
+part = ExtResource("2_06alk")
+metadata/_custom_type_script = "uid://h6555gedi0xg"
+
+[node name="IconSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(32, 32)
+scale = Vector2(4, 4)
+texture = ExtResource("2_0cok4")
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_06alk")
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+z_index = -1
+width = 4.0
+default_color = Color(0.321569, 0.286275, 0.321569, 1)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

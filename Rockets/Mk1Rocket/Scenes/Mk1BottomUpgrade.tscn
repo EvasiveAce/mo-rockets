@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://btu3s04itpw06" path="res://Rockets/Mk1Rocket/Sprites/Icons/Mk1BottomIcon.png" id="3_3l0uq"]
 [ext_resource type="AudioStream" uid="uid://88ryy4i3csdm" path="res://Upgrades/Sounds/UpgradeBought.wav" id="4_8fpda"]
 
-[node name="UpgradeIcon" type="Button"]
+[node name="Mk1BottomUpgrade" type="Button"]
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = -1
 anchor_right = 0.033
@@ -15,7 +15,6 @@ offset_bottom = 0.279995
 flat = true
 script = ExtResource("1_42p2t")
 part = ExtResource("2_pcggs")
-metadata/_custom_type_script = "uid://cullam7o7pdt2"
 
 [node name="IconSprite" type="Sprite2D" parent="."]
 texture_filter = 1
