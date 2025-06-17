@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=5 format=3 uid="uid://3dpjpa624pe4"]
+
+[ext_resource type="Texture2D" uid="uid://l5olvsomfw2o" path="res://Rockets/SpringlockedRocket/Sprites/SpringlockedBottom.png" id="1_4gkx7"]
+[ext_resource type="Texture2D" uid="uid://bi51pgt5ri6yy" path="res://Rockets/SpringlockedRocket/Sprites/Icons/SpringlockedBottomBoughtIcon.png" id="1_7h68o"]
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="1_qqu0r"]
+[ext_resource type="Texture2D" uid="uid://d31bhl6yx7odb" path="res://Rockets/SpringlockedRocket/Sprites/Icons/SpringlockedBottomIcon.png" id="2_xfm1e"]
+
+[resource]
+script = ExtResource("1_qqu0r")
+partType = 2
+statModifier1Name = 1
+statModifier1Amount = 0.35
+statModifier2Name = 2
+statModifier2Amount = -0.15
+partSprite = ExtResource("1_4gkx7")
+constantsName = "springlockedBottomUpgrade"
+boughtBool = false
+unlockedBool = false
+upgradeName = "Springlocked Bottom"
+upgradeCost = 10
+upgradeDesc = "\"Better keep this wounded up...\""
+upgradeInfo = "+0.35 Speed\\n-0.15 Fuel"
+iconSprite = ExtResource("2_xfm1e")
+boughtSprite = ExtResource("1_7h68o")
+metadata/_custom_type_script = "uid://uy4ow50n7icm"

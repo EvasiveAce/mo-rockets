@@ -290,6 +290,7 @@ cache/0/48/0/scale = 1.0
 [node name="World" type="Node2D"]
 script = ExtResource("1_u70lu")
 metadata/_edit_vertical_guides_ = [1024.0, 1920.0, 1024.0, 1024.0, 1024.0, 1472.0]
+metadata/_edit_horizontal_guides_ = [608.0]
 
 [node name="RocketSubview" type="SubViewportContainer" parent="."]
 offset_left = 816.0
@@ -308,7 +309,7 @@ texture = ExtResource("6")
 
 [node name="Ground" type="Sprite2D" parent="RocketSubview/SubViewport"]
 texture_filter = 1
-position = Vector2(656, 540)
+position = Vector2(656, 680)
 scale = Vector2(4, 4)
 texture = ExtResource("2")
 script = ExtResource("4_p88va")
