@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b0k8dqawn6up3"]
+[gd_scene load_steps=34 format=3 uid="uid://b0k8dqawn6up3"]
 
 [ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="1"]
 [ext_resource type="Script" uid="uid://cpntb1c2by1kf" path="res://Common/World/Scripts/World.gd" id="1_u70lu"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cnjwhhf5ij2m4" path="res://Common/World/Sprites/SkyBackground.png" id="6"]
 [ext_resource type="AudioStream" uid="uid://cht2ym8qgw68f" path="res://Common/World/Sounds/NoRecord.wav" id="7"]
 [ext_resource type="AudioStream" uid="uid://baftgwx4s2ao3" path="res://Common/World/Sounds/Record.wav" id="8"]
+[ext_resource type="Texture2D" uid="uid://dp2516hmxidc8" path="res://Common/World/Ground/Sprites/SkyVariant1.png" id="8_7ngjb"]
+[ext_resource type="Script" uid="uid://cgk02w8spec84" path="res://Common/World/Ground/Scripts/SkyParallax.gd" id="8_xv5hd"]
 [ext_resource type="Texture2D" uid="uid://clvyutum68j2d" path="res://Common/World/Sprites/TempUI.png" id="9_xygge"]
 [ext_resource type="PackedScene" uid="uid://kapeogwyt0w1" path="res://Common/ShopDetails/Scenes/ShopDetails.tscn" id="10_3do7r"]
 [ext_resource type="Texture2D" uid="uid://dykkl3f17f284" path="res://Common/World/Sprites/TempUIOverlay.png" id="11_efwql"]
@@ -320,6 +322,21 @@ texture_filter = 1
 position = Vector2(-94, 26)
 texture = ExtResource("4_fgxwt")
 
+[node name="SkyParallax" type="ParallaxBackground" parent="RocketSubview/SubViewport/Ground"]
+layer = 1
+script = ExtResource("8_xv5hd")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="RocketSubview/SubViewport/Ground/SkyParallax"]
+position = Vector2(224, 48)
+motion_mirroring = Vector2(7000, 0)
+
+[node name="SkyVariant" type="Sprite2D" parent="RocketSubview/SubViewport/Ground/SkyParallax/ParallaxLayer"]
+texture_filter = 1
+position = Vector2(-5852, -48)
+scale = Vector2(4, 4)
+texture = ExtResource("8_7ngjb")
+centered = false
+
 [node name="CanvasLayer" type="CanvasLayer" parent="RocketSubview/SubViewport"]
 
 [node name="Record" type="Label" parent="RocketSubview/SubViewport/CanvasLayer"]
@@ -369,10 +386,6 @@ pitch_scale = 0.75
 
 [node name="NoRecord" type="AudioStreamPlayer" parent="RocketSubview/SubViewport"]
 stream = ExtResource("7")
-
-[node name="Camera2D" type="Camera2D" parent="RocketSubview/SubViewport"]
-position = Vector2(960, 412)
-enabled = false
 
 [node name="TempUI" type="Sprite2D" parent="."]
 texture_filter = 1
