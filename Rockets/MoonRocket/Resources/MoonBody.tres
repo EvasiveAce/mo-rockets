@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=3 format=3 uid="uid://tqysqxwjaq8w"]
+
+[ext_resource type="Texture2D" uid="uid://bm0fgs8jfoplm" path="res://Rockets/MoonRocket/Sprites/MoonBody.png" id="1_a6su8"]
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="1_uaur3"]
+
+[resource]
+script = ExtResource("1_uaur3")
+partType = 1
+statModifier1Name = 0
+statModifier1Amount = 0.0
+statModifier2Name = 0
+statModifier2Amount = 0.0
+partSprite = ExtResource("1_a6su8")
+constantsName = ""
+boughtBool = false
+unlockedBool = false
+upgradeName = ""
+upgradeCost = 0
+upgradeDesc = ""
+upgradeInfo = ""
+metadata/_custom_type_script = "uid://uy4ow50n7icm"

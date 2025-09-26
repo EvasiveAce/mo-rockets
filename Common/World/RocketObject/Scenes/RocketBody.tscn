@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://j7qn735p6u43" path="res://Common/World/RocketObject/Scripts/RocketBody.gd" id="4"]
 
 [node name="RocketBody" type="Node2D"]
+visible = false
 script = ExtResource("4")
 
 [node name="RocketBodySprite" type="Sprite2D" parent="."]

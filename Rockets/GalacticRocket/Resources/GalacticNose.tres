@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=3 format=3 uid="uid://kmmwuk85ccha"]
+
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="1_7h2mk"]
+[ext_resource type="Texture2D" uid="uid://ihlinehjaxa0" path="res://Rockets/GalacticRocket/Sprites/GalacticNose.png" id="1_dhjlo"]
+
+[resource]
+script = ExtResource("1_7h2mk")
+partSprite = ExtResource("1_dhjlo")
+metadata/_custom_type_script = "uid://uy4ow50n7icm"

@@ -8,37 +8,30 @@ extends Node2D
 @onready var animation = $AssemblyAnimationSprite
 
 @onready var button1 = $AssemblyButton1
-@onready var trait1 = $AssemblyButton1/AssemblyNameBox/AssemblyTrait1
-@onready var trait1_2 = $AssemblyButton1/AssemblyNameBox/AssemblyTrait2
-@onready var stats1 = $AssemblyButton1/AssemblyStatsBox/AssemblyStats1
-@onready var stats1_2 = $AssemblyButton1/AssemblyStatsBox/AssemblyStats2
 
 @onready var button2 = $AssemblyButton2
-@onready var trait2 = $AssemblyButton2/AssemblyNameBox/AssemblyTrait1
-@onready var trait2_2 = $AssemblyButton2/AssemblyNameBox/AssemblyTrait2
-@onready var stats2 = $AssemblyButton2/AssemblyStatsBox/AssemblyStats1
-@onready var stats2_2 = $AssemblyButton2/AssemblyStatsBox/AssemblyStats2
-@onready var partName = $AssemblyButton2/Name
 
 @onready var button3 = $AssemblyButton3
-@onready var trait3 = $AssemblyButton3/AssemblyNameBox/AssemblyTrait1
-@onready var trait3_2 = $AssemblyButton3/AssemblyNameBox/AssemblyTrait2
-@onready var stats3 = $AssemblyButton3/AssemblyStatsBox/AssemblyStats1
-@onready var stats3_2 = $AssemblyButton3/AssemblyStatsBox/AssemblyStats2
 
 var part1
 var part2
 var part3
 
+var part1Value : Array
+var part2Value : Array
+var part3Value : Array
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if Constants.endlessMode:
+		$EndlessButton.visible = true
+		$EndlessButton.disabled = false
+		if Constants.endlessModeEnabled:
+			$EndlessButton.toggled.disconnect(_on_button_toggled)
+			$EndlessButton.button_pressed = true
+			$EndlessButton.toggled.connect(_on_button_toggled)
+			$EndlessButton.modulate = '00ff00'
 	_checkStage()
-	if Constants.partChoiceUpgrade:
-		$AssemblySprite.texture = assemblySprite
-		$AssemblyButton1.visible = true
-		$AssemblyButton3.visible = true
-	else:
-		$AssemblySprite.texture = assemblySpriteNoUpgrade
 	animation.flip_v = true
 	animation.play("TransitionIn")
 	animation.flip_v = false
@@ -50,10 +43,11 @@ func _ready():
 	add_child(part2)
 	add_child(part3)
 
-
-	#_fillOutButton(button1, trait1, trait1_2, stats1, stats1_2, rocketNose1)
-	_fillOutButton(button2, part2)
-	#_fillOutButton(button3, trait3, trait3_2, stats3, stats3_2, rocketNose3)
+	_fillOutButton(button1, part1, part1Value)
+	_fillOutButton(button2, part2, part2Value)
+	_fillOutButton(button3, part3, part3Value)
+	await animation.animation_finished
+	Constants.transitioning = false
 
 func _checkStage():
 	if Constants.stage == "NOSE":
@@ -63,23 +57,16 @@ func _checkStage():
 	elif Constants.stage == "BOTTOM":
 		partObject = load("res://Common/World/RocketObject/Scenes/RocketBottom.tscn")
 
-
-func _process(_delta: float) -> void:
-	if Constants.automation1 && $Timer.is_stopped():
-		$Timer.start(2.5)
-
 func _clear_container(container : VBoxContainer) -> void:
 	for child in container.get_children():
 		container.remove_child(child)
 		child.queue_free()
 
-func _fillOutButton(button : Button, part):
+func _fillOutButton(button : Button, part, partValue):
 	var speedArray = []
 	var fuelArray = []
 	var speedValue : float = 0.0
 	var fuelValue : float = 0.0
-	var speedStat = RocketPart.StatType.keys()[1]
-	var fuelStat = RocketPart.StatType.keys()[2]
 
 	var trait_vbox = button.get_node("AssemblyNameBox")
 	var number_vbox = button.get_node("AssemblyStatsBox")
@@ -87,34 +74,22 @@ func _fillOutButton(button : Button, part):
 	_clear_container(trait_vbox)
 	_clear_container(number_vbox)
 
-	if part.rocketPart.StatType.keys()[part.rocketPart.statModifier1Name] != part.rocketPart.StatType.keys()[part.rocketPart.StatType.NONE]:
-		match part.rocketPart.StatType.keys()[part.rocketPart.statModifier1Name]:
-			speedStat:
-				speedArray.push_front({"Part" : part.rocketPart.statModifier1Amount})
-			fuelStat:
-				fuelArray.push_front({"Part" : part.rocketPart.statModifier1Amount})
-
-	if part.rocketPart.StatType.keys()[part.rocketPart.statModifier2Name] != part.rocketPart.StatType.keys()[part.rocketPart.StatType.NONE]:
-		match part.rocketPart.StatType.keys()[part.rocketPart.statModifier2Name]:
-			speedStat:
-				speedArray.push_front({"Part" : part.rocketPart.statModifier2Amount})
-			fuelStat:
-				fuelArray.push_front({"Part" : part.rocketPart.statModifier2Amount})
-
-	if len(Constants.modifiers) > 0 and part.rocketModifier != null:
-		if part.rocketModifier.StatType.keys()[part.rocketModifier.statModifier1Name] != part.rocketModifier.StatType.keys()[part.rocketModifier.StatType.NONE]:
-			match part.rocketModifier.StatType.keys()[part.rocketModifier.statModifier1Name]:
-				speedStat:
-					speedArray.push_front({part.rocketModifier.modifierName : part.rocketModifier.statModifier1Amount})
-				fuelStat:
-					fuelArray.push_front({part.rocketModifier.modifierName : part.rocketModifier.statModifier1Amount})
+	for i in range(2):
+		var random_trait = randi() % 2  # 0 for speed, 1 for fuel
+		var modifier_value
 		
-		if part.rocketModifier.StatType.keys()[part.rocketModifier.statModifier2Name] != part.rocketModifier.StatType.keys()[part.rocketModifier.StatType.NONE]:
-			match part.rocketModifier.StatType.keys()[part.rocketModifier.statModifier2Name]:
-				speedStat:
-					speedArray.push_front({part.rocketModifier.modifierName : part.rocketModifier.statModifier2Amount})
-				fuelStat:
-					fuelArray.push_front({part.rocketModifier.modifierName : part.rocketModifier.statModifier2Amount})
+		# Get modifier value from part
+		if i == 0:
+			modifier_value = part.rocketPart._get_stat1_modifier()
+		else:
+			modifier_value = part.rocketPart._get_stat2_modifier()
+		
+		match random_trait:
+			0:  # speedStat
+				speedArray.push_front({"Part" : modifier_value})
+			1:  # fuelStat
+				fuelArray.push_front({"Part" : modifier_value})
+
 	
 	if len(speedArray) > 0:
 		for value in speedArray:
@@ -125,18 +100,9 @@ func _fillOutButton(button : Button, part):
 		mainLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainNumberLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainLabel.text = "SPEED"
-		mainNumberLabel.text = "+" + str(speedValue) if speedValue > 0 else str(speedValue)
+		mainNumberLabel.text = ("+" if speedValue > 0 else "") + "%.2f" % speedValue
 		trait_vbox.add_child(mainLabel)
 		number_vbox.add_child(mainNumberLabel)
-		for pair in speedArray:
-			var label = Label.new()
-			var numbLabel = Label.new()
-			label.label_settings = preload("res://Data/Resources/LabelSettings.tres")
-			numbLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
-			label.text = "  |_ " + pair.keys()[0]
-			numbLabel.text = "+" + str(pair.values()[0]) if pair.values()[0] > 0 else str(pair.values()[0])
-			trait_vbox.add_child(label)
-			number_vbox.add_child(numbLabel)
 		var spaceLabel = Label.new()
 		var spaceNumLabel = Label.new()
 		trait_vbox.add_child(spaceLabel)
@@ -151,49 +117,92 @@ func _fillOutButton(button : Button, part):
 		mainLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainNumberLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainLabel.text = "FUEL"
-		mainNumberLabel.text = "+" + str(fuelValue) if fuelValue > 0 else str(fuelValue)
+		mainNumberLabel.text = ("+" if fuelValue > 0 else "") + "%.2f" % fuelValue
 		trait_vbox.add_child(mainLabel)
 		number_vbox.add_child(mainNumberLabel)
-		for pair in fuelArray:
-			var label = Label.new()
-			var numbLabel = Label.new()
-			label.label_settings = preload("res://Data/Resources/LabelSettings.tres")
-			numbLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
-			label.text = "  |_ " + pair.keys()[0]
-			numbLabel.text = "+" + str(pair.values()[0]) if pair.values()[0] > 0 else str(pair.values()[0])
-			trait_vbox.add_child(label)
-			number_vbox.add_child(numbLabel)
-
-	partName.text = str(part.rocketModifier.modifierName) + " " + str(part.rocketPart.upgradeName) if part.rocketModifier != null else str(part.rocketPart.upgradeName)
+	#partName.text = str(part.rocketModifier.modifierName) + " " + str(part.rocketPart.upgradeName) if part.rocketModifier != null else str(part.rocketPart.upgradeName)
 	
 	button.icon = part.rocketPart.partSprite
+	button.set("theme_override_colors/icon_normal_color", part.rocketPart.modulate)
+	button.set("theme_override_colors/icon_hover_color", part.rocketPart.modulate)
+	button.set("theme_override_colors/icon_hover_pressed_color", part.rocketPart.modulate)
+	button.set("theme_override_colors/icon_disabled_color", part.rocketPart.modulate)
+	button.set("theme_override_colors/icon_pressed_color", part.rocketPart.modulate)
+
+	partValue.push_front(fuelValue)
+	partValue.push_front(speedValue)
+
 	#button.self_modulate = rocket.modulate
 
 func _on_AssemblyButton1_pressed():
+	_disableButtons()
 	$Select.play()
+	Constants._addPart(part1, part1Value)
+	#Constants.rocketNoseModulate = rocketNose2.modulate
+	Constants.transitioning = true
 	animation.play("TransitionOut")
 	await animation.animation_finished
 	_tree_check()
 
 func _on_AssemblyButton2_pressed():
+	_disableButtons()
 	$Select.play()
-	Constants._addPart(part2)
+	Constants._addPart(part2, part2Value)
 	#Constants.rocketNoseModulate = rocketNose2.modulate
+	Constants.transitioning = true
 	animation.play("TransitionOut")
 	await animation.animation_finished
 	_tree_check()
 
 func _on_AssemblyButton3_pressed():
+	_disableButtons()
 	$Select.play()
+	Constants._addPart(part3, part3Value)
+	#Constants.rocketNoseModulate = rocketNose2.modulate
+	Constants.transitioning = true
 	animation.play("TransitionOut")
 	await animation.animation_finished
 	_tree_check()
 
+func _disableButtons():
+	$AssemblyButton1.disabled = true
+	$AssemblyButton2.disabled = true
+	$AssemblyButton3.disabled = true
+
 func _tree_check():
-	if not is_inside_tree():
-		return
-	else:
-		SignalBus.stage_finished.emit()
+	_stage_finished()
 
 func _on_timer_timeout() -> void:
 	_on_AssemblyButton2_pressed()
+
+
+func _stage_finished():
+	if Constants.stage == "NOSE":
+		_nose_finished()
+	elif Constants.stage == "BODY":
+		_body_finished()
+	elif Constants.stage == "BOTTOM":
+		_bottom_finished()
+
+func _nose_finished():
+	Constants.stage = "BODY"
+	get_tree().change_scene_to_file("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
+
+func _body_finished():
+	Constants.stage = "BOTTOM"
+	get_tree().change_scene_to_file("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
+
+func _bottom_finished():
+	Constants.stage = "NOSE"
+	get_tree().change_scene_to_file("res://Common/World/Scenes/World.tscn")
+
+
+func _on_button_toggled(toggled_on:bool) -> void:
+	if toggled_on:
+		Constants.endlessModeEnabled = true
+		$EndlessButton.modulate = '00ff00'
+		$EndlessSelect.play()
+	else:
+		Constants.endlessModeEnabled = false
+		$EndlessButton.modulate = 'ff0000'
+		$EndlessSelect.play()

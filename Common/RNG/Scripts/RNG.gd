@@ -36,12 +36,3 @@ func _statsNameRandomize():
 
 func _statsAmountRandomize():
 	return (randf_range((-.5), (.5)) + (Constants.RDBuildingAmount * 0.05) + (Constants.ArtBuildingAmount * .10))
-
-func _randomizeModifier():
-	if !Constants.modifiers.is_empty():
-		if randf() < 0.25:
-			return null
-		else:
-			return Constants.modifiers[randi() % Constants.modifiers.size()]
-	else:
-		return null

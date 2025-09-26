@@ -1,0 +1,34 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cw60nbpchu4td"]
+
+[ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="1_y76o7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y76o7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y76o7"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0aeh"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gev45"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[resource]
+default_font = ExtResource("1_y76o7")
+default_font_size = 32
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_y76o7")
+Button/styles/hover = SubResource("StyleBoxFlat_y76o7")
+Button/styles/normal = SubResource("StyleBoxFlat_n0aeh")
+Button/styles/pressed = SubResource("StyleBoxFlat_gev45")

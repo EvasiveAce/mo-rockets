@@ -19,6 +19,6 @@ unlockedBool = true
 upgradeName = "Standard Nose"
 upgradeCost = 0
 upgradeDesc = "\"Aerodynamic and dependable\""
-upgradeInfo = "+0.1 Speed"
+upgradeInfo = ""
 iconSprite = ExtResource("2_xe38a")
 boughtSprite = ExtResource("1_1emh7")

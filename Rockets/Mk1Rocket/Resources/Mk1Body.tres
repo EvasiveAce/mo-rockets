@@ -8,18 +8,18 @@
 [resource]
 script = ExtResource("4_pruaa")
 partType = 1
+statModifier1Name = 2
+statModifier1Amount = 0.5
+statModifier2Name = 1
+statModifier2Amount = -0.15
+partSprite = ExtResource("3_57be5")
 constantsName = "mk1BodyUpgrade"
 boughtBool = false
 unlockedBool = false
 upgradeName = "Mark I Body"
 upgradeCost = 5
 upgradeDesc = "\"It worked! ...at least once\""
-upgradeInfo = "+0.5 Fuel\\n-0.15 Speed"
-statModifier1Name = 2
-statModifier1Amount = 0.5
-statModifier2Name = 1
-statModifier2Amount = -0.15
+upgradeInfo = "Rocket Stat Multiplier +1%"
 iconSprite = ExtResource("2_yjtn1")
 boughtSprite = ExtResource("1_rx12u")
-partSprite = ExtResource("3_57be5")
 metadata/_custom_type_script = "uid://uy4ow50n7icm"

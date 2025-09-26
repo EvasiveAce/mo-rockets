@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="UpgradePart" load_steps=5 format=3 uid="uid://btv2nadfq6dp0"]
+
+[ext_resource type="Texture2D" uid="uid://bd0ouduxe6as1" path="res://Upgrades/BuildingUpgrades/RDBuildingUpgrade/Sprites/RDBuildingBoughtIcon.png" id="1_ap2th"]
+[ext_resource type="Script" uid="uid://bu2nlniaggkea" path="res://Data/Modifiers/Scripts/Modifier.gd" id="1_wutgp"]
+[ext_resource type="Texture2D" uid="uid://c2ployrykcda4" path="res://Upgrades/BuildingUpgrades/RDBuildingUpgrade/Sprites/RDBuildingIcon.png" id="2_5bnp4"]
+[ext_resource type="Script" uid="uid://8usv0vhqicv1" path="res://Upgrades/Scripts/UpgradePart.gd" id="2_65lmi"]
+
+[resource]
+script = ExtResource("2_65lmi")
+modifiersToAdd = Array[ExtResource("1_wutgp")]([])
+constantsName = "rdBuildingUpgrade"
+boughtBool = false
+unlockedBool = false
+upgradeName = "R&D Building"
+upgradeCost = 50
+upgradeDesc = "\"Research! (and development!)\""
+upgradeInfo = "Unlocks more upgrades and part descriptions!"
+iconSprite = ExtResource("2_5bnp4")
+boughtSprite = ExtResource("1_ap2th")
+metadata/_custom_type_script = "uid://8usv0vhqicv1"

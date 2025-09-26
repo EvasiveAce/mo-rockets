@@ -8,17 +8,17 @@
 [resource]
 script = ExtResource("1_l8c8d")
 partType = 2
+statModifier1Name = 2
+statModifier1Amount = 0.1
+statModifier2Name = 0
+statModifier2Amount = 0.0
+partSprite = ExtResource("3_fh875")
 constantsName = "baseBottomUpgrade"
 boughtBool = true
 unlockedBool = true
 upgradeName = "Standard Bottom"
 upgradeCost = 0
 upgradeDesc = "\"Sturdy and tested\""
-upgradeInfo = "+0.1 Fuel"
-statModifier1Name = 2
-statModifier1Amount = 0.1
-statModifier2Name = 0
-statModifier2Amount = 0.0
+upgradeInfo = ""
 iconSprite = ExtResource("2_nl22g")
 boughtSprite = ExtResource("1_kg187")
-partSprite = ExtResource("3_fh875")

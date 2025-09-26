@@ -5,8 +5,11 @@ func _on_pressed() -> void:
 		Constants.research -= part.upgradeCost
 		Constants[part.constantsName] = true
 		part.boughtBool = Constants[part.constantsName]
+
+		Constants.defaultFuel += .1
 		for modifier in part.modifiersToAdd:
 			Constants.modifiers.push_front(modifier)
+
 		$IconSprite.texture = part.boughtSprite
 		line_2D.default_color = 'fcf8fc'
 		$Select.play()

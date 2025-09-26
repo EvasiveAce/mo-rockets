@@ -1,9 +1,9 @@
 extends Node2D
 
-@onready var rocketNoseScene = load("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
-@onready var rocketBodyScene = load("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
-@onready var rocketBottomScene = load("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
-@onready var launchDetailScene = load("res://Common/LaunchDetails/Scenes/LaunchDetails.tscn")
+@onready var rocketNoseScene = preload("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
+@onready var rocketBodyScene = preload("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
+@onready var rocketBottomScene = preload("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
+@onready var launchDetailScene = preload("res://Common/LaunchDetails/Scenes/LaunchDetails.tscn")
 
 
 var noseScene
@@ -20,18 +20,46 @@ var launchScene
 
 @onready var firstTime = true
 @onready var endEngaged = true
+var switching = false
+var recordFunc = false
+var recordFuncFinished = false
 
 var rocket
 var camera2D
 @onready var rocketAssembled = false
 
+var abortReady = false
+
+@onready var animation = $CanvasLayer2/AssemblyAnimationSprite
+
 var shake_amount = 0.0
 var shake_decay = 0.05
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SignalBus.stage_finished.connect(_stage_finished)
+	%AbortLaunch.visible = false
+	if Constants.scrapButtonEnabled:
+		$ScrapRocket.visible = true
+	$Ground/SkyParallax.scroll_base_offset.x = Constants.scrollbaseOffset
+	$Ground/SkyParallax/ParallaxLayer.position.x = Constants.cloudPosition
+	_initalizeRocket()
+	var stringToUse = "%.2fx"
+	$CanvasLayer/Multiplier/MultiplierValue.text = stringToUse % [Constants.statMultiplier]
+	$HighScore.text = str(Constants.highestAltitude) + ' m' if Constants.highestAltitude < 100000 else str(Constants.highestAltitude/1000) + ' km'
+	if !Constants.initLoading:
+		rocket.get_node('RocketParticles2').lifetime = .01
+		rocket.get_node('RocketParticles2').amount = 1
+		rocket.get_node('RocketParticles2').set_emitting(true)
+		rocket.get_node('RocketExplodeParticles2').lifetime = .01
+		rocket.get_node('RocketExplodeParticles2').amount = 1
+		rocket.get_node('RocketExplodeParticles2').set_emitting(true)
+
+		await rocket.get_node('RocketParticles2').finished
+		await rocket.get_node('RocketExplodeParticles2').finished
+		Constants.initLoading = true
+
+	animation.play("TransitionIn")
+	await animation.animation_finished
+	Constants.transitioning = false
 
 func _screen_shake():
 	if camera2D and shake_amount > 0.0:
@@ -43,123 +71,397 @@ func _screen_shake():
 
 func _process(_delta):
 
-	_screen_shake()
+	if !rocket.grounded and abortReady:
+		%AbortLaunch.visible = true
+	else:
+		%AbortLaunch.visible = false
 
-	$Research/ResearchValue.text = str(Constants.research)
+	var altitude_limit_reached = false
+	if Constants.altitude >= 384399000 and !Constants.endlessModeEnabled:
+		altitude_limit_reached = true
+		if rocket:
+			rocket.set_process(false)
+			rocket.position.y = -384399000
+		Constants.altitude = 384399000
+		altitude.text = '384399000m'
+		Constants.scrollbaseOffset = $Ground/SkyParallax.scroll_base_offset.x
+		Constants.cloudPosition = $Ground/SkyParallax/ParallaxLayer.position.x
+		#await get_tree().create_timer(6).timeout
+		remove_child(rocket)
+		get_tree().root.add_child(rocket)
+		get_tree().change_scene_to_file("res://Common/EndScene/Scenes/EndScene.tscn")
+		
 
-	if Constants.automation1Upgrade and !$AutomationToggle.visible:
-		$AutomationToggle.show()
+		
+	elif Constants.altitude < 384399000 or !altitude_limit_reached:
+		
 
-	if rocketAssembled:
-		if !Constants.automation1 and firstTime:
-			get_node("AssemblyViewport/SubViewport/LaunchDetails/Control/Press").show()
-		speed = get_node("AssemblyViewport/SubViewport/LaunchDetails/Control/Speed/SpeedValue")
-		fuel = get_node("AssemblyViewport/SubViewport/LaunchDetails/Control/Fuel/FuelValue")
-		altitude = get_node("AssemblyViewport/SubViewport/LaunchDetails/Control/Altitude/AltitudeValue")
-		speed.text = str(rocket.speedToUse)
-		fuel.text = str(snapped(rocket.fuelToUse, 0.01))
-		if (rocket.position.y - 625) * -1 >= Constants.altitude:
-			if Constants.altitude < 1000:
+		_screen_shake()
+
+		if rocketAssembled:
+			speed = get_node("CanvasLayer/Speed/SpeedValue")
+			fuel = get_node("CanvasLayer/Fuel/FuelValue")
+			altitude = get_node("CanvasLayer/Altitude")
+			speed.text = str(rocket.speedToUse)
+			fuel.text = str(snapped(rocket.fuelToUse, 0.01))
+			if (rocket.position.y - 625) * -1 >= Constants.altitude:
 				Constants.altitude = snapped((rocket.position.y - 625) * -1, 1)
-				altitude.text = str(Constants.altitude) + "m"
-			else:
-				Constants.altitude = (rocket.position.y - 625) * -1
-				altitude.text = str(snapped((float((Constants.altitude) / 1000)), .1)) + "km"
-		if (Input.is_action_just_released("ui_accept") and firstTime) or (Constants.automation1 and firstTime):
-			get_node("AssemblyViewport/SubViewport/LaunchDetails/Control/Press").hide()
-			rocket._blastOff()
-			shake_amount = 3.5
-			firstTime = false
-		_endGame()
-		if !endEngaged:
-			if !Constants.automation1:
-				get_node("AssemblyViewport/SubViewport/LaunchDetails/Control/PressAssemble").show()
-				get_node("AssemblyViewport/SubViewport/LaunchDetails/Control/ResearchPointsAwarded").show()
-				get_node("AssemblyViewport/SubViewport/LaunchDetails/Control/ResearchPointsAwarded/ResearchPointValue").text = str(snapped((Constants.altitude / 100), 1))
-			if Input.is_action_just_pressed("ui_accept") or Constants.automation1:
-				
-				$AssemblyViewport/SubViewport.remove_child($AssemblyViewport/SubViewport/LaunchDetails)
-				endEngaged = true
-				firstTime = true
-				rocketAssembled = false
-				noseScene = rocketNoseScene.instantiate()
-				noseScene.name = 'AssemblyNose'
-				$AssemblyViewport/SubViewport.add_child(noseScene)
-				Constants.altitude = 0.0
+				if Constants.altitude >= 100000:
+					altitude.text = str(Constants.altitude/1000) + "km"
+				else:
+					altitude.text = str(Constants.altitude) + "m"
+			if (Input.is_action_just_released("ui_accept") and firstTime):
+				$ScrapRocket.visible = false
+				rocket._blastOff()
+				shake_amount = 3.5
+				set_timer()
+				firstTime = false
+			_endGame()
+			_recordFunc()
+			if !endEngaged and !switching and recordFuncFinished:
+				if Input.is_action_just_pressed("ui_accept"):
+					Constants.scrollbaseOffset = $Ground/SkyParallax.scroll_base_offset.x
+					Constants.cloudPosition = $Ground/SkyParallax/ParallaxLayer.position.x
+					switching = true
+					Constants.transitioning = true
+					animation.play("TransitionOut")
+					await animation.animation_finished
+					get_tree().change_scene_to_file("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
+					rocketAssembled = false
+					if Constants.highestAltitude == Constants.altitude:
+						Constants.statMultiplier += .05
+					else:
+						Constants.statMultiplier += .01
+					Constants.altitude = 0.0
 
-func _stage_finished():
-	if Constants.stage == "NOSE":
-		_nose_finished()
-	elif Constants.stage == "BODY":
-		_body_finished()
-	elif Constants.stage == "BOTTOM":
-		_bottom_finished()
+func set_timer():
+	await get_tree().create_timer(5.75).timeout
+	if !rocket.grounded:
+		abortReady = true
+		%AbortLaunch.visible = true
 
-func _nose_finished():
-	Constants.stage = "BODY"
-	var rocketToRemove = $RocketSubview/SubViewport/RocketControl.get_node_or_null("Rocket")
-	if rocketToRemove:
-		$RocketSubview/SubViewport/RocketControl.remove_child(rocketToRemove)
+func _recordFunc():
+	if !recordFunc && !endEngaged:
+		recordFunc = true
+		# High Score
+		if Constants.highestAltitude == Constants.altitude:
+			$Record.play()
+			$CanvasLayer/Record.visible = true
+			await get_tree().create_timer(.25).timeout
+			$CanvasLayer/Record.visible = false
+			await get_tree().create_timer(.25).timeout
+			$CanvasLayer/Record.visible = true
+			await get_tree().create_timer(.25).timeout
+			$CanvasLayer/Record.visible = false
+			await get_tree().create_timer(.25).timeout
+			$CanvasLayer/Record.visible = true
+			await get_tree().create_timer(.25).timeout
 
-	$AssemblyViewport/SubViewport.remove_child($AssemblyViewport/SubViewport/AssemblyNose)
-	bodyScene = rocketBodyScene.instantiate()
-	bodyScene.name = 'AssemblyBody'
-	$AssemblyViewport/SubViewport.add_child(bodyScene)
+		# Legacy Fuel/Speed - Corroded Parts
+		if (Constants.legacyFuel <= 0 and Constants.legacySpeed <= 0) and !Constants.corrodedPartsUpgrade:
+			Constants.corrodedPartsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Corroded Parts Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.noseParts.push_front(preload('res://Rockets/CorrodedRocket/Resources/CorrodedNose.tres'))
+			Constants.bodyParts.push_front(preload('res://Rockets/CorrodedRocket/Resources/CorrodedBody.tres'))
+			Constants.bottomParts.push_front(preload('res://Rockets/CorrodedRocket/Resources/CorrodedBottom.tres'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
 
-func _body_finished():
-	Constants.stage = "BOTTOM"
-	$AssemblyViewport/SubViewport.remove_child($AssemblyViewport/SubViewport/AssemblyBody)
-	bottomScene = rocketBottomScene.instantiate()
-	bottomScene.name = 'AssemblyBottom'
-	$AssemblyViewport/SubViewport.add_child(bottomScene)
+		# 750m - Mk. I Parts
+		if Constants.altitude >= 750 and !Constants.mk1PartsUpgrade:
+			Constants.mk1PartsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Mark I Parts Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.noseParts.push_front(preload('res://Rockets/Mk1Rocket/Resources/Mk1Nose.tres'))
+			Constants.bodyParts.push_front(preload('res://Rockets/Mk1Rocket/Resources/Mk1Body.tres'))
+			Constants.bottomParts.push_front(preload('res://Rockets/Mk1Rocket/Resources/Mk1Bottom.tres'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
 
-func _bottom_finished():
-	Constants.stage = "NOSE"
-	$AssemblyViewport/SubViewport.remove_child($AssemblyViewport/SubViewport/AssemblyBottom)
-	launchScene = launchDetailScene.instantiate()
-	launchScene.name = 'LaunchDetails'
-	$AssemblyViewport/SubViewport.add_child(launchScene)
+		# 1000m - Primary Paints
+		if Constants.altitude >= 1000 and !Constants.primaryColorsUpgrade:
+			Constants.primaryColorsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Primary Paints Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.colors.push_front(Color('0000ff'))
+			Constants.colors.push_front(Color('00ff00'))
+			Constants.colors.push_front(Color('ff0000'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
 
-	_initalizeRocket()
+		# 1987m - Springlocked Parts
+		if Constants.altitude >= 1987 and !Constants.springLockedPartsUpgrade:
+			Constants.springLockedPartsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Springlocked Parts Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.noseParts.push_front(preload('res://Rockets/SpringlockedRocket/Resources/SpringlockedNose.tres'))
+			Constants.bodyParts.push_front(preload('res://Rockets/SpringlockedRocket/Resources/SpringlockedBody.tres'))
+			Constants.bottomParts.push_front(preload('res://Rockets/SpringlockedRocket/Resources/SpringlockedBottom.tres'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
 
+		# 2500m - Gameboy Paints
+		if Constants.altitude >= 2500 and !Constants.retroColorsUpgrade:
+			Constants.retroColorsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Gameboy Paints Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.colors.push_front(Color('8bac0f'))
+			Constants.colors.push_front(Color('306230'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 5000m - Plastic Parts
+		if Constants.altitude >= 5000 and !Constants.plasticPartsUpgrade:
+			Constants.plasticPartsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Plastic Parts Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.noseParts.push_front(preload('res://Rockets/PlasticRocket/Resources/PlasticNose.tres'))
+			Constants.bodyParts.push_front(preload('res://Rockets/PlasticRocket/Resources/PlasticBody.tres'))
+			Constants.bottomParts.push_front(preload('res://Rockets/PlasticRocket/Resources/PlasticBottom.tres'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 5 Launches - War Parts
+		if Constants.amountOfLaunches >= 5 and !Constants.warPartsUpgrade:
+			Constants.warPartsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "War Parts Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.noseParts.push_front(preload('res://Rockets/WarRocket/Resources/WarNose.tres'))
+			Constants.bodyParts.push_front(preload('res://Rockets/WarRocket/Resources/WarBody.tres'))
+			Constants.bottomParts.push_front(preload('res://Rockets/WarRocket/Resources/WarBottom.tres'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 7500m - Best Browser Paints
+		if Constants.altitude >= 7500 and !Constants.bestBrowserColorUpgrade:
+			Constants.bestBrowserColorUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Best Browser Paints Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.colors.push_front(Color('ff9500'))
+			Constants.colors.push_front(Color('ffcb00'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 10000m - Mouse Parts
+		if Constants.altitude >= 10000 and !Constants.mousePartsUpgrade:
+			Constants.mousePartsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Mouse Parts Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.noseParts.push_front(preload('res://Rockets/MouseRocket/Resources/MouseNose.tres'))
+			Constants.bodyParts.push_front(preload('res://Rockets/MouseRocket/Resources/MouseBody.tres'))
+			Constants.bottomParts.push_front(preload('res://Rockets/MouseRocket/Resources/MouseBottom.tres'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 10 Launches - Alternative Paints
+		if Constants.amountOfLaunches >= 10 and !Constants.alternativeColorsUpgrade:
+			Constants.alternativeColorsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Alternative Paints Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.colors.push_front(Color('00ffff'))
+			Constants.colors.push_front(Color('ffff00'))
+			Constants.colors.push_front(Color('ff00ff'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 15000m - Mann Co. Paints
+		if Constants.altitude >= 15000 and !Constants.mannCoColorsUpgrade:
+			Constants.mannCoColorsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Mann Co. Paints Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.colors.push_front(Color('5b7a8c'))
+			Constants.colors.push_front(Color('bd3b3b'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 15 Launches - Scrap Button
+		if Constants.amountOfLaunches >= 15 and !Constants.scrapButtonEnabled:
+			Constants.scrapButtonEnabled = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Scrap Button Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 25 Launches - Strange Parts
+		if Constants.amountOfLaunches >= 25 and !Constants.strangePartsUpgrade:
+			Constants.strangePartsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Strange Parts Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.noseParts.push_front(preload('res://Rockets/StrangeRocket/Resources/StrangeNose.tres'))
+			Constants.bodyParts.push_front(preload('res://Rockets/StrangeRocket/Resources/StrangeBody.tres'))
+			Constants.bottomParts.push_front(preload('res://Rockets/StrangeRocket/Resources/StrangeBottom.tres'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 30000m - Cartoon Paints
+		if Constants.altitude >= 30000 and !Constants.cartoonColorsUpgrade:
+			Constants.cartoonColorsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Monster Paints Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.colors.push_front(Color('9c6a4a'))
+			Constants.colors.push_front(Color('5082c0'))
+			Constants.colors.push_front(Color('f8b0c8'))
+			Constants.colors.push_front(Color('bd7bdd'))
+			Constants.colors.push_front(Color('3fae40'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 50000m - Robot Parts
+		if Constants.altitude >= 50000 and !Constants.robotPartsUpgrade:
+			Constants.robotPartsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Robot Parts Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.noseParts.push_front(preload('res://Rockets/RobotRocket/Resources/RobotNose.tres'))
+			Constants.bodyParts.push_front(preload('res://Rockets/RobotRocket/Resources/RobotBody.tres'))
+			Constants.bottomParts.push_front(preload('res://Rockets/RobotRocket/Resources/RobotBottom.tres'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 75000m - Crafty Paints
+		if Constants.altitude >= 75000 and !Constants.notchedColorsUpgrade:
+			Constants.notchedColorsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Crafty Paints Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.colors.push_front(Color('95c366'))
+			Constants.colors.push_front(Color('4aedd9'))
+			Constants.colors.push_front(Color('606060'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 100000m - Slim Parts
+		if Constants.altitude >= 100000 and !Constants.slimPartsUpgrade:
+			Constants.slimPartsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Slim Parts Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.noseParts.push_front(preload('res://Rockets/SlimRocket/Resources/SlimNose.tres'))
+			Constants.bodyParts.push_front(preload('res://Rockets/SlimRocket/Resources/SlimBody.tres'))
+			Constants.bottomParts.push_front(preload('res://Rockets/SlimRocket/Resources/SlimBottom.tres'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 250000m - Galactic Parts
+		if Constants.altitude >= 250000 and !Constants.galacticPartsUpgrade:
+			Constants.galacticPartsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Galactic Parts Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.noseParts.push_front(preload('res://Rockets/GalacticRocket/Resources/GalacticNose.tres'))
+			Constants.bodyParts.push_front(preload('res://Rockets/GalacticRocket/Resources/GalacticBody.tres'))
+			Constants.bottomParts.push_front(preload('res://Rockets/GalacticRocket/Resources/GalacticBottom.tres'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 500000m - Metallic Paints
+		if Constants.altitude >= 500000 and !Constants.metallicColorsUpgrade:
+			Constants.metallicColorsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Metallic Paints Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.colors.push_front(Color('c0c0c0'))
+			Constants.colors.push_front(Color('c79f00'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 1000000m - Black Paint
+		if Constants.altitude >= 1000000 and !Constants.blackColorUpgrade:
+			Constants.blackColorUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Black Paint Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.colors.push_front(Color('0f0f0f'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+		# 384399000m - Moon Parts & Endless Mode
+		if Constants.altitude >= 384399000 and !Constants.moonPartsUpgrade:
+			Constants.moonPartsUpgrade = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Moon Parts Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			Constants.noseParts.push_front(preload('res://Rockets/MoonRocket/Resources/MoonNose.tres'))
+			Constants.bodyParts.push_front(preload('res://Rockets/MoonRocket/Resources/MoonBody.tres'))
+			Constants.bottomParts.push_front(preload('res://Rockets/MoonRocket/Resources/MoonBottom.tres'))
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+
+			Constants.endlessMode = true
+			$PartsUnlocked.play()
+			$CanvasLayer/Parts.text = "Endless Mode Unlocked!"
+			$CanvasLayer/Parts.visible = true
+			await get_tree().create_timer(1.0).timeout
+			$CanvasLayer/Parts.visible = false
+			
+
+		recordFuncFinished = true		
 
 
 func _initalizeRocket():
 	rocket = rocketObject.instantiate()
 	rocket.noseTexture = Constants.rocketNose.partSprite
-	rocket.noseModulate = Constants.rocketNoseModulate
+	rocket.noseModulate = Constants.rocketNose.modulate
 	rocket.bodyTexture = Constants.rocketBody.partSprite
-	rocket.bodyModulate = Constants.rocketBodyModulate
+	rocket.bodyModulate = Constants.rocketBody.modulate
 	rocket.bottomTexture = Constants.rocketBottom.partSprite
-	rocket.bottomModulate = Constants.rocketBottomModulate
-	rocket.position.x = 656
+	rocket.bottomModulate = Constants.rocketBottom.modulate
+	rocket.position.x = 960
 	rocket.position.y = 625
-	$RocketSubview/SubViewport/RocketControl.add_child(rocket)
+	add_child(rocket)
 	rocketAssembled = true
 	camera2D = Camera2D.new()
 	camera2D.enabled = true
 	camera2D.name = 'Camera2D'
-	#camera2D.make_current()
-	camera2D.position.x = 30
+	camera2D.limit_enabled = false
+	camera2D.position.x = 0
 	camera2D.position.y = -85
 	rocket.add_child(camera2D)
 
 
 func _endGame():
-	if !firstTime and rocket.position.y >= 600 and rocket.timer.is_stopped() and endEngaged:
+	if !firstTime and rocket.position.y >= 600 and !rocket.launching and endEngaged:
+		rocket.position.y = 600
+		rocket._explode()
 		if Constants.altitude > Constants.highestAltitude:
 			Constants.highestAltitude = Constants.altitude
 		endEngaged = false
-		rocket._explode()
-		Constants.research += snapped((Constants.altitude / 100), 1)
 
 
-# func _on_automation_toggle_toggled(toggled_on:bool) -> void:
-# 	if !toggled_on:
-# 		Constants.automation1 = true
-# 		$AutomationToggle/Sprite.texture = automationOnSprite
-# 		$AutomationToggle/Select.play()
-# 	else:
-# 		Constants.automation1 = false
-# 		$AutomationToggle/Sprite.texture = automationOffSprite
-# 		$AutomationToggle/Select.play()
+func _on_scrap_rocket_pressed() -> void:
+	$ScrapRocketSound.play()
+	Constants.scrollbaseOffset = $Ground/SkyParallax.scroll_base_offset.x
+	Constants.cloudPosition = $Ground/SkyParallax/ParallaxLayer.position.x
+	switching = true
+	Constants.transitioning = true
+	animation.play("TransitionOut")
+	await animation.animation_finished
+	get_tree().change_scene_to_file("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
+	rocketAssembled = false
+
+
+func _on_abort_launch_pressed() -> void:
+	rocket.launching = false
+	abortReady = false
+	rocket.grounded = true
+	%AbortLaunch.visible = false
+	rocket._explode()
+	if Constants.altitude > Constants.highestAltitude:
+		Constants.highestAltitude = Constants.altitude
+	endEngaged = false
+	_recordFunc()
