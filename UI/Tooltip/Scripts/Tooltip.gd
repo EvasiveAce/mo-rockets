@@ -1,31 +1,35 @@
-extends Control
+extends CanvasLayer
 
-func ItemPopup(item):
+func ItemPopup(item, node):
 	# Get current mouse position
-	var mouse_pos = get_viewport().get_mouse_position()
-	
+	var node_global_pos = node.global_position
+	var node_size = node.size
+
 	# Update popup content
-	%ItemPopup/MarginContainer/VBoxContainer/Name.text = item[0]
-	%ItemPopup/MarginContainer/VBoxContainer/Price.text = str(item[2]) + " Research"
-	%ItemPopup/MarginContainer/VBoxContainer/Description.text = item[3]
-	%ItemPopup/MarginContainer/VBoxContainer/Information.text = item[1].c_unescape()
+	%Main/MarginContainer/VBoxContainer/Name.text = item[0]
+	%Main/MarginContainer/VBoxContainer/Information.text = item[1]
 	
 	# Calculate popup position
 	var viewport_size = get_viewport().get_visible_rect().size
-	var popup_pos = Vector2i(mouse_pos)
+	var popup_pos = Vector2()
+	popup_pos.x = node_global_pos.x + (node_size.x / 2) - (%Main.size.x / 2)
+	popup_pos.y = node_global_pos.y - %Main.size.y - 10  # 10px above node
 	
-	# Add a small offset from cursor
-	popup_pos += Vector2i(20, 20)
-	
-	# Make sure it stays on screen
-	if (popup_pos.x + %ItemPopup.size.x) > viewport_size.x:
-		popup_pos.x = mouse_pos.x - %ItemPopup.size.x - 20
-	
-	if (popup_pos.y + %ItemPopup.size.y) > viewport_size.y:
-		popup_pos.y = mouse_pos.y - %ItemPopup.size.y - 20
-		
+	_font_determine()
+
 	# Set final position
-	%ItemPopup.popup(Rect2i(popup_pos, %ItemPopup.size))
+	%Main.size = Vector2(324,88)
+	%Main.position = popup_pos
+	visible = true
 
 func HideItemPopup():
-	%ItemPopup.hide()
+	visible = false
+
+func _font_determine():
+	var stringLength = %Name.text.length()
+	if stringLength < 14:
+		%Name.add_theme_font_size_override('font_size', 32)
+	elif stringLength < 23:
+		%Name.add_theme_font_size_override('font_size', 24)
+	else:
+		%Name.add_theme_font_size_override('font_size', 16)

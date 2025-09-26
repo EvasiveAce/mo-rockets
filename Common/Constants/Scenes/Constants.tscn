@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dy0h83y01ih7y"]
+[gd_scene load_steps=3 format=3 uid="uid://dy0h83y01ih7y"]
 
 [ext_resource type="Script" uid="uid://44qkm2v3mei" path="res://Common/Constants/Scripts/Constants.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://dvg8ndvsiynst" path="res://Common/SettingsMenu/Sounds/SettingsMenu.wav" id="2_d1fu4"]
 
 [node name="Constants" type="Control"]
 layout_mode = 3
@@ -10,3 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
+
+[node name="AudioStreamPlayerOut" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_d1fu4")
+pitch_scale = 0.8

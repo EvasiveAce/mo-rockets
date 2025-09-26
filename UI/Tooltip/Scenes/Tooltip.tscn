@@ -1,71 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://ci7y5khuu0p1l"]
+[gd_scene load_steps=5 format=3 uid="uid://ci7y5khuu0p1l"]
 
 [ext_resource type="Script" uid="uid://hnur46xu0ftr" path="res://UI/Tooltip/Scripts/Tooltip.gd" id="1_hfy1w"]
 [ext_resource type="Theme" uid="uid://badtmnjesntls" path="res://UI/Tooltip/Resources/ToolTipTheme.tres" id="2_730ub"]
 [ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="2_i1hrg"]
 
-[node name="UpgradeTooltip" type="Control"]
-layout_mode = 3
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7732f"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="UpgradeTooltip" type="CanvasLayer"]
+layer = 3
+visible = false
+script = ExtResource("1_hfy1w")
+
+[node name="Main" type="Panel" parent="."]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_right = 0.167
+anchor_bottom = 0.081
+offset_right = -0.640015
+offset_bottom = 0.519997
+theme = ExtResource("2_730ub")
+
+[node name="MarginContainer" type="MarginContainer" parent="Main"]
+texture_filter = 1
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hfy1w")
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="ItemPopup" type="PopupPanel" parent="UI"]
-unique_name_in_owner = true
-size = Vector2i(300, 225)
-visible = true
-max_size = Vector2i(300, 225)
-theme = ExtResource("2_730ub")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/ItemPopup"]
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 298.0
-offset_bottom = 223.0
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ItemPopup/MarginContainer"]
+[node name="Panel" type="Panel" parent="Main/MarginContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7732f")
 
-[node name="Name" type="Label" parent="UI/ItemPopup/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="Main/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_i1hrg")
 theme_override_font_sizes/font_size = 32
-text = "Upgrade Name"
+text = "???"
 horizontal_alignment = 1
-autowrap_mode = 3
+vertical_alignment = 1
 
-[node name="Price" type="Label" parent="UI/ItemPopup/MarginContainer/VBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_i1hrg")
-theme_override_font_sizes/font_size = 16
-text = "Price"
-horizontal_alignment = 1
-
-[node name="Description" type="Label" parent="UI/ItemPopup/MarginContainer/VBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_i1hrg")
-theme_override_font_sizes/font_size = 16
-text = "Description"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="Information" type="Label" parent="UI/ItemPopup/MarginContainer/VBoxContainer"]
+[node name="Information" type="Label" parent="Main/MarginContainer/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_i1hrg")
 theme_override_font_sizes/font_size = 24
 text = "Information"
 horizontal_alignment = 1
-autowrap_mode = 2

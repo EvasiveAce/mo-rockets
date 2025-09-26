@@ -8,18 +8,18 @@
 [resource]
 script = ExtResource("4_x836s")
 partType = 0
+statModifier1Name = 2
+statModifier1Amount = 0.25
+statModifier2Name = 1
+statModifier2Amount = -0.05
+partSprite = ExtResource("2_pwr5l")
 constantsName = "mk1NoseUpgrade"
 boughtBool = false
 unlockedBool = false
 upgradeName = "Mark I Nose"
 upgradeCost = 5
 upgradeDesc = "\"The engineers found a shotty hubcap and added rocket fuel\""
-upgradeInfo = "+0.25 Fuel\\n-0.05 Speed"
-statModifier1Name = 2
-statModifier1Amount = 0.25
-statModifier2Name = 1
-statModifier2Amount = -0.05
+upgradeInfo = "Rocket Stat Multiplier +1%"
 iconSprite = ExtResource("3_6mfky")
 boughtSprite = ExtResource("1_mc4bd")
-partSprite = ExtResource("2_pwr5l")
 metadata/_custom_type_script = "uid://uy4ow50n7icm"

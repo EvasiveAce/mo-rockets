@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=3 format=3 uid="uid://cawipfbfs074t"]
+
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="1_60wjb"]
+[ext_resource type="Texture2D" uid="uid://b4eknakefj6lw" path="res://Rockets/RobotRocket/Sprites/RobotBody.png" id="1_ucm0f"]
+
+[resource]
+script = ExtResource("1_60wjb")
+partType = 1
+statModifier1Name = 0
+statModifier1Amount = 0.0
+statModifier2Name = 0
+statModifier2Amount = 0.0
+partSprite = ExtResource("1_ucm0f")
+constantsName = ""
+boughtBool = false
+unlockedBool = false
+upgradeName = ""
+upgradeCost = 0
+upgradeDesc = ""
+upgradeInfo = ""
+metadata/_custom_type_script = "uid://uy4ow50n7icm"

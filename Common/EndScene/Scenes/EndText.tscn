@@ -1,0 +1,297 @@
+[gd_scene load_steps=28 format=3 uid="uid://b43620bw2hxpe"]
+
+[ext_resource type="Texture2D" uid="uid://j3gqyb7elsc1" path="res://Common/Tutorial/Sprites/TitleScreenWithoutLogo.png" id="1_qsswr"]
+[ext_resource type="Script" uid="uid://b1l5e2ljnwnl" path="res://Common/EndScene/Scripts/EndText.gd" id="1_vn4pk"]
+[ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="2_d8smb"]
+[ext_resource type="Texture2D" uid="uid://djxq238met163" path="res://Common/Tutorial/Sprites/Heart.png" id="3_d8smb"]
+[ext_resource type="Texture2D" uid="uid://bsaqd1axd2erc" path="res://Common/AssemblyStage/Sprites/TransitionAnimation.png" id="3_vn4pk"]
+
+[sub_resource type="FontFile" id="FontFile_0lw1k"]
+fallbacks = Array[Font]([ExtResource("2_d8smb")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/128/0/ascent = 0.0
+cache/0/128/0/descent = 0.0
+cache/0/128/0/underline_position = 0.0
+cache/0/128/0/underline_thickness = 0.0
+cache/0/128/0/scale = 1.0
+cache/0/144/0/ascent = 0.0
+cache/0/144/0/descent = 0.0
+cache/0/144/0/underline_position = 0.0
+cache/0/144/0/underline_thickness = 0.0
+cache/0/144/0/scale = 1.0
+
+[sub_resource type="FontFile" id="FontFile_mhbkf"]
+fallbacks = Array[Font]([ExtResource("2_d8smb")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+cache/0/72/0/ascent = 0.0
+cache/0/72/0/descent = 0.0
+cache/0/72/0/underline_position = 0.0
+cache/0/72/0/underline_thickness = 0.0
+cache/0/72/0/scale = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vn4pk"]
+atlas = ExtResource("3_d8smb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lw1k"]
+atlas = ExtResource("3_d8smb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhbkf"]
+atlas = ExtResource("3_d8smb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7x5ko"]
+atlas = ExtResource("3_d8smb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qytuw"]
+atlas = ExtResource("3_d8smb")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63vkt"]
+atlas = ExtResource("3_d8smb")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6d84d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vn4pk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lw1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhbkf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7x5ko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qytuw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63vkt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="9"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="10"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="11"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="12"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="13"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="14"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="3"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="4"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="5"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="6"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="7"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="8"]
+atlas = ExtResource("3_vn4pk")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7x5ko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("9")
+}, {
+"duration": 1.0,
+"texture": SubResource("10")
+}, {
+"duration": 1.0,
+"texture": SubResource("11")
+}, {
+"duration": 1.0,
+"texture": SubResource("12")
+}, {
+"duration": 1.0,
+"texture": SubResource("13")
+}, {
+"duration": 1.0,
+"texture": SubResource("14")
+}],
+"loop": false,
+"name": &"TransitionIn",
+"speed": 32.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("3")
+}, {
+"duration": 1.0,
+"texture": SubResource("4")
+}, {
+"duration": 1.0,
+"texture": SubResource("5")
+}, {
+"duration": 1.0,
+"texture": SubResource("6")
+}, {
+"duration": 1.0,
+"texture": SubResource("7")
+}, {
+"duration": 1.0,
+"texture": SubResource("8")
+}],
+"loop": false,
+"name": &"TransitionOut",
+"speed": 32.0
+}]
+
+[node name="EndText" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_vn4pk")
+
+[node name="TitleScreenSprite" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_qsswr")
+
+[node name="Tutorial" type="Label" parent="."]
+offset_left = 88.0
+offset_top = 77.0
+offset_right = 1460.0
+offset_bottom = 239.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -4
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 18
+theme_override_constants/shadow_outline_size = 16
+theme_override_fonts/font = SubResource("FontFile_0lw1k")
+theme_override_font_sizes/font_size = 144
+text = "Mission Success"
+
+[node name="Text" type="Label" parent="."]
+offset_left = 92.0
+offset_top = 292.0
+offset_right = 1671.0
+offset_bottom = 439.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -4
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("2_d8smb")
+theme_override_font_sizes/font_size = 72
+text = "Endless mode is now unlocked!"
+
+[node name="Text2" type="Label" parent="."]
+offset_left = 92.0
+offset_top = 424.0
+offset_right = 1834.0
+offset_bottom = 673.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -4
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = SubResource("FontFile_mhbkf")
+theme_override_font_sizes/font_size = 72
+text = "It is buggy at larger numbers, so
+the results may vary. If you got this far,
+thank you for playing my game!"
+
+[node name="Text3" type="Label" parent="."]
+offset_left = 888.0
+offset_top = 756.0
+offset_right = 1573.0
+offset_bottom = 810.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("FontFile_mhbkf")
+theme_override_font_sizes/font_size = 48
+text = "Press Space to Continue"
+
+[node name="Heart" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(319, 857)
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_6d84d")
+autoplay = "default"
+frame_progress = 0.300756
+
+[node name="AssemblyAnimationSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(960, 540)
+sprite_frames = SubResource("SpriteFrames_7x5ko")
+animation = &"TransitionIn"

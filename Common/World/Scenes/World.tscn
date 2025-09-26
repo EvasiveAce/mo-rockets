@@ -1,21 +1,19 @@
-[gd_scene load_steps=34 format=3 uid="uid://b0k8dqawn6up3"]
+[gd_scene load_steps=32 format=3 uid="uid://b0k8dqawn6up3"]
 
 [ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="1"]
 [ext_resource type="Script" uid="uid://cpntb1c2by1kf" path="res://Common/World/Scripts/World.gd" id="1_u70lu"]
 [ext_resource type="Texture2D" uid="uid://do0xy0tboiuxw" path="res://Common/World/Ground/Sprites/GroundSprite.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://bsaqd1axd2erc" path="res://Common/AssemblyStage/Sprites/TransitionAnimation.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://du7lxf1rc60s6" path="res://Common/World/Ground/Sprites/RDBuilding.png" id="4_fgxwt"]
-[ext_resource type="Script" uid="uid://bnk3qv4kqpprp" path="res://Common/World/Ground/Scripts/GroundBuildingScript.gd" id="4_p88va"]
 [ext_resource type="Texture2D" uid="uid://b20iqhv62jxku" path="res://Common/World/Sprites/Parralax.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://cnjwhhf5ij2m4" path="res://Common/World/Sprites/SkyBackground.png" id="6"]
 [ext_resource type="AudioStream" uid="uid://cht2ym8qgw68f" path="res://Common/World/Sounds/NoRecord.wav" id="7"]
 [ext_resource type="AudioStream" uid="uid://baftgwx4s2ao3" path="res://Common/World/Sounds/Record.wav" id="8"]
 [ext_resource type="Texture2D" uid="uid://dp2516hmxidc8" path="res://Common/World/Ground/Sprites/SkyVariant1.png" id="8_7ngjb"]
 [ext_resource type="Script" uid="uid://cgk02w8spec84" path="res://Common/World/Ground/Scripts/SkyParallax.gd" id="8_xv5hd"]
-[ext_resource type="Texture2D" uid="uid://clvyutum68j2d" path="res://Common/World/Sprites/TempUI.png" id="9_xygge"]
-[ext_resource type="PackedScene" uid="uid://kapeogwyt0w1" path="res://Common/ShopDetails/Scenes/ShopDetails.tscn" id="10_3do7r"]
-[ext_resource type="Texture2D" uid="uid://dykkl3f17f284" path="res://Common/World/Sprites/TempUIOverlay.png" id="11_efwql"]
-[ext_resource type="PackedScene" uid="uid://qxnero7cbs0m" path="res://Common/AssemblyStage/Scenes/AssemblyStage.tscn" id="13_kwl8l"]
+[ext_resource type="AudioStream" uid="uid://cgnobrm7anv5p" path="res://Common/World/Sounds/PartsUnlocked.wav" id="11_g7jo6"]
+[ext_resource type="Theme" uid="uid://cw60nbpchu4td" path="res://Common/SettingsMenu/Themes/ButtonTheme.tres" id="12_g7jo6"]
+[ext_resource type="AudioStream" uid="uid://bpd4xvrkjpi7g" path="res://Common/World/Sounds/Scrapped.wav" id="12_jc2p5"]
 
 [sub_resource type="FontFile" id="3"]
 fallbacks = Array[Font]([ExtResource("1")])
@@ -36,103 +34,11 @@ cache/0/32/0/underline_thickness = 0.0
 cache/0/32/0/scale = 1.0
 cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
 cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
-
-[sub_resource type="AtlasTexture" id="4"]
-atlas = ExtResource("4")
-region = Rect2(9600, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="5"]
-atlas = ExtResource("4")
-region = Rect2(7680, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="6"]
-atlas = ExtResource("4")
-region = Rect2(5760, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="7"]
-atlas = ExtResource("4")
-region = Rect2(3840, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="8"]
-atlas = ExtResource("4")
-region = Rect2(1920, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="9"]
-atlas = ExtResource("4")
-region = Rect2(0, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="10"]
-atlas = ExtResource("4")
-region = Rect2(0, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="11"]
-atlas = ExtResource("4")
-region = Rect2(1920, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="12"]
-atlas = ExtResource("4")
-region = Rect2(3840, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="13"]
-atlas = ExtResource("4")
-region = Rect2(5760, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="14"]
-atlas = ExtResource("4")
-region = Rect2(7680, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="15"]
-atlas = ExtResource("4")
-region = Rect2(9600, 0, 1920, 1080)
-
-[sub_resource type="SpriteFrames" id="16"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("4")
-}, {
-"duration": 1.0,
-"texture": SubResource("5")
-}, {
-"duration": 1.0,
-"texture": SubResource("6")
-}, {
-"duration": 1.0,
-"texture": SubResource("7")
-}, {
-"duration": 1.0,
-"texture": SubResource("8")
-}, {
-"duration": 1.0,
-"texture": SubResource("9")
-}],
-"loop": false,
-"name": &"TransitionIn",
-"speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("10")
-}, {
-"duration": 1.0,
-"texture": SubResource("11")
-}, {
-"duration": 1.0,
-"texture": SubResource("12")
-}, {
-"duration": 1.0,
-"texture": SubResource("13")
-}, {
-"duration": 1.0,
-"texture": SubResource("14")
-}, {
-"duration": 1.0,
-"texture": SubResource("15")
-}],
-"loop": false,
-"name": &"TransitionOut",
-"speed": 16.0
-}]
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
 
 [sub_resource type="FontFile" id="FontFile_pfeit"]
 fallbacks = Array[Font]([ExtResource("1")])
@@ -289,57 +195,144 @@ cache/0/48/0/underline_position = 0.0
 cache/0/48/0/underline_thickness = 0.0
 cache/0/48/0/scale = 1.0
 
+[sub_resource type="AtlasTexture" id="4"]
+atlas = ExtResource("4")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="5"]
+atlas = ExtResource("4")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="6"]
+atlas = ExtResource("4")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="7"]
+atlas = ExtResource("4")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="8"]
+atlas = ExtResource("4")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="9"]
+atlas = ExtResource("4")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="10"]
+atlas = ExtResource("4")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="11"]
+atlas = ExtResource("4")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="12"]
+atlas = ExtResource("4")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="13"]
+atlas = ExtResource("4")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="14"]
+atlas = ExtResource("4")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="15"]
+atlas = ExtResource("4")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="SpriteFrames" id="16"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("4")
+}, {
+"duration": 1.0,
+"texture": SubResource("5")
+}, {
+"duration": 1.0,
+"texture": SubResource("6")
+}, {
+"duration": 1.0,
+"texture": SubResource("7")
+}, {
+"duration": 1.0,
+"texture": SubResource("8")
+}, {
+"duration": 1.0,
+"texture": SubResource("9")
+}],
+"loop": false,
+"name": &"TransitionIn",
+"speed": 32.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("10")
+}, {
+"duration": 1.0,
+"texture": SubResource("11")
+}, {
+"duration": 1.0,
+"texture": SubResource("12")
+}, {
+"duration": 1.0,
+"texture": SubResource("13")
+}, {
+"duration": 1.0,
+"texture": SubResource("14")
+}, {
+"duration": 1.0,
+"texture": SubResource("15")
+}],
+"loop": false,
+"name": &"TransitionOut",
+"speed": 32.0
+}]
+
 [node name="World" type="Node2D"]
+process_mode = 1
+texture_filter = 1
 script = ExtResource("1_u70lu")
-metadata/_edit_vertical_guides_ = [1024.0, 1920.0, 1024.0, 1024.0, 1024.0, 1472.0]
-metadata/_edit_horizontal_guides_ = [608.0]
+metadata/_edit_vertical_guides_ = [1920.0, 3536.0, 960.0]
 
-[node name="RocketSubview" type="SubViewportContainer" parent="."]
-offset_left = 816.0
-offset_right = 2188.0
-offset_bottom = 1080.0
-
-[node name="SubViewport" type="SubViewport" parent="RocketSubview"]
-handle_input_locally = false
-size = Vector2i(1372, 1080)
-render_target_update_mode = 4
-
-[node name="SkyBackground" type="Sprite2D" parent="RocketSubview/SubViewport"]
+[node name="SkyBackground" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(960, -540)
 texture = ExtResource("6")
 
-[node name="Ground" type="Sprite2D" parent="RocketSubview/SubViewport"]
+[node name="Ground" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(656, 680)
-scale = Vector2(4, 4)
+position = Vector2(960, 678)
+scale = Vector2(4, 3.98824)
 texture = ExtResource("2")
-script = ExtResource("4_p88va")
 
-[node name="RDBuilding" type="Sprite2D" parent="RocketSubview/SubViewport/Ground"]
+[node name="RDBuilding" type="Sprite2D" parent="Ground"]
 visible = false
 texture_filter = 1
-position = Vector2(-94, 26)
+position = Vector2(-93.5, -9.75)
 texture = ExtResource("4_fgxwt")
 
-[node name="SkyParallax" type="ParallaxBackground" parent="RocketSubview/SubViewport/Ground"]
+[node name="SkyParallax" type="ParallaxBackground" parent="Ground"]
 layer = 1
 script = ExtResource("8_xv5hd")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="RocketSubview/SubViewport/Ground/SkyParallax"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Ground/SkyParallax"]
 position = Vector2(224, 48)
 motion_mirroring = Vector2(7000, 0)
 
-[node name="SkyVariant" type="Sprite2D" parent="RocketSubview/SubViewport/Ground/SkyParallax/ParallaxLayer"]
+[node name="SkyVariant" type="Sprite2D" parent="Ground/SkyParallax/ParallaxLayer"]
 texture_filter = 1
 position = Vector2(-5852, -48)
 scale = Vector2(4, 4)
 texture = ExtResource("8_7ngjb")
 centered = false
 
-[node name="CanvasLayer" type="CanvasLayer" parent="RocketSubview/SubViewport"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Record" type="Label" parent="RocketSubview/SubViewport/CanvasLayer"]
+[node name="Record" type="Label" parent="CanvasLayer"]
 visible = false
 texture_filter = 1
 offset_left = 720.0
@@ -347,122 +340,206 @@ offset_top = 342.0
 offset_right = 1206.0
 offset_bottom = 486.0
 theme_override_fonts/font = SubResource("3")
-theme_override_font_sizes/font_size = 32
-text = "NEW RECORD"
+theme_override_font_sizes/font_size = 64
+text = "New Best Run!"
+horizontal_alignment = 1
 
-[node name="MultiplierIncrease" type="Label" parent="RocketSubview/SubViewport/CanvasLayer/Record"]
+[node name="Parts" type="Label" parent="CanvasLayer"]
+visible = false
 texture_filter = 1
-layout_mode = 0
-offset_left = -103.0
-offset_top = 90.0
-offset_right = 584.0
-offset_bottom = 234.0
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -36.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = SubResource("3")
-theme_override_font_sizes/font_size = 32
-text = "Stats Increased"
+theme_override_font_sizes/font_size = 64
+text = "Mk. 1 Parts Unlocked!"
+horizontal_alignment = 1
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="RocketSubview/SubViewport/CanvasLayer"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
 
-[node name="Sky" type="Sprite2D" parent="RocketSubview/SubViewport/CanvasLayer/ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_mirroring = Vector2(0, 2160)
+
+[node name="Sky" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
 texture_filter = 1
 position = Vector2(960, 540)
 texture = ExtResource("5")
 
-[node name="RocketControl" type="Node2D" parent="RocketSubview/SubViewport"]
+[node name="Altitude" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1897.0
+offset_top = 27.0
+offset_right = -1492.0
+offset_bottom = 99.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_pfeit")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
 
-[node name="AssemblyAnimationSprite" type="AnimatedSprite2D" parent="RocketSubview/SubViewport"]
+[node name="Multiplier" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1883.0
+offset_top = 89.0
+offset_right = -1564.0
+offset_bottom = 161.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_e3i5d")
+theme_override_font_sizes/font_size = 48
+text = "Multiplier:"
+
+[node name="MultiplierValue" type="Label" parent="CanvasLayer/Multiplier"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 345.0
+offset_right = 379.0
+offset_bottom = 72.0
+theme_override_fonts/font = SubResource("FontFile_eyw45")
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 1
+
+[node name="Speed" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1883.0
+offset_top = 137.0
+offset_right = -1564.0
+offset_bottom = 209.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_e3i5d")
+theme_override_font_sizes/font_size = 48
+text = "Speed:"
+
+[node name="SpeedValue" type="Label" parent="CanvasLayer/Speed"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 345.0
+offset_right = 379.0
+offset_bottom = 72.0
+theme_override_fonts/font = SubResource("FontFile_eyw45")
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 1
+
+[node name="Fuel" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1883.0
+offset_top = 182.0
+offset_right = -1564.0
+offset_bottom = 254.0
+grow_horizontal = 0
+theme_override_fonts/font = SubResource("FontFile_e3i5d")
+theme_override_font_sizes/font_size = 48
+text = "Fuel:"
+
+[node name="FuelValue" type="Label" parent="CanvasLayer/Fuel"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 345.0
+offset_right = 379.0
+offset_bottom = 72.0
+theme_override_fonts/font = SubResource("FontFile_eyw45")
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 1
+
+[node name="AbortLaunch" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
 visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(300, 50)
+offset_left = 808.0
+offset_top = 856.0
+offset_right = 1112.0
+offset_bottom = 936.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("12_g7jo6")
+text = "Abort Rocket"
+
+[node name="RocketControl" type="Node2D" parent="."]
+
+[node name="AnimationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Record" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8")
+pitch_scale = 0.75
+
+[node name="PartsUnlocked" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_g7jo6")
+
+[node name="NoRecord" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7")
+
+[node name="ScrapRocketSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_jc2p5")
+
+[node name="BestRun" type="Label" parent="."]
+texture_filter = 1
+offset_left = 1144.0
+offset_top = 763.522
+offset_right = 1469.0
+offset_bottom = 835.522
+rotation = -0.250367
+theme_override_colors/font_color = Color(0.34902, 0.756863, 0.207843, 1)
+theme_override_colors/font_outline_color = Color(0.443137, 0.254902, 0.231373, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 64
+text = "Best Run"
+
+[node name="HighScore" type="Label" parent="."]
+texture_filter = 1
+offset_left = 1199.0
+offset_top = 804.522
+offset_right = 1433.0
+offset_bottom = 876.522
+rotation = -0.250367
+theme_override_colors/font_color = Color(0.34902, 0.756863, 0.207843, 1)
+theme_override_colors/font_outline_color = Color(0.443137, 0.254902, 0.231373, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 64
+text = "1000 m"
+horizontal_alignment = 1
+
+[node name="ScrapRocket" type="Button" parent="."]
+visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(300, 50)
+offset_left = 808.0
+offset_top = 856.0
+offset_right = 1112.0
+offset_bottom = 936.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("12_g7jo6")
+text = "Scrap Rocket"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="AssemblyAnimationSprite" type="AnimatedSprite2D" parent="CanvasLayer2"]
 texture_filter = 1
 position = Vector2(960, 540)
 sprite_frames = SubResource("16")
 animation = &"TransitionIn"
 
-[node name="AnimationTimer" type="Timer" parent="RocketSubview/SubViewport"]
-one_shot = true
-
-[node name="Record" type="AudioStreamPlayer" parent="RocketSubview/SubViewport"]
-stream = ExtResource("8")
-pitch_scale = 0.75
-
-[node name="NoRecord" type="AudioStreamPlayer" parent="RocketSubview/SubViewport"]
-stream = ExtResource("7")
-
-[node name="TempUI" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(960, 540)
-scale = Vector2(4, 4)
-texture = ExtResource("9_xygge")
-
-[node name="ShopViewport" type="SubViewportContainer" parent="."]
-offset_right = 1008.0
-offset_bottom = 512.0
-
-[node name="SubViewport" type="SubViewport" parent="ShopViewport"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1008, 512)
-render_target_update_mode = 4
-
-[node name="ShopDetails" parent="ShopViewport/SubViewport" instance=ExtResource("10_3do7r")]
-
-[node name="AssemblyViewport" type="SubViewportContainer" parent="."]
-offset_left = -22.0
-offset_top = 544.0
-offset_right = 1873.0
-offset_bottom = 1624.0
-scale = Vector2(0.55, 0.55)
-
-[node name="SubViewport" type="SubViewport" parent="AssemblyViewport"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1895, 1080)
-render_target_update_mode = 4
-
-[node name="AssemblyNose" parent="AssemblyViewport/SubViewport" instance=ExtResource("13_kwl8l")]
-
-[node name="TempUIAbove" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(960, 544)
-scale = Vector2(4, 4)
-texture = ExtResource("11_efwql")
-
-[node name="RocketShop" type="Label" parent="."]
-texture_filter = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 10.0
-offset_top = -6.0
-offset_right = 500.0
-offset_bottom = 66.0
-grow_horizontal = 0
-theme_override_fonts/font = SubResource("FontFile_pfeit")
-theme_override_font_sizes/font_size = 64
-text = "Rocket Shop"
-
-[node name="Research" type="Label" parent="."]
-texture_filter = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 24.0
-offset_top = 56.0
-offset_right = 663.0
-offset_bottom = 128.0
-grow_horizontal = 0
-theme_override_fonts/font = SubResource("FontFile_e3i5d")
-theme_override_font_sizes/font_size = 48
-text = "Research Points:"
-
-[node name="ResearchValue" type="Label" parent="Research"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 496.0
-offset_right = 580.0
-offset_bottom = 72.0
-theme_override_fonts/font = SubResource("FontFile_eyw45")
-theme_override_font_sizes/font_size = 48
-text = "0"
-
-[connection signal="mouse_entered" from="ShopViewport" to="ShopViewport/SubViewport/ShopDetails" method="_on_shop_viewport_mouse_entered"]
-[connection signal="mouse_exited" from="ShopViewport" to="ShopViewport/SubViewport/ShopDetails" method="_on_shop_viewport_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/AbortLaunch" to="." method="_on_abort_launch_pressed"]
+[connection signal="pressed" from="ScrapRocket" to="." method="_on_scrap_rocket_pressed"]

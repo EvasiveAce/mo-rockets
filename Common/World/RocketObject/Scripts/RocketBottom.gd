@@ -4,12 +4,10 @@ extends Node2D
 @onready var sprite = $RocketBottomSprite
 
 var rocketPart: RocketPart
-var rocketModifier: Modifier
 
 func _ready():
 	randomize()
 	rocketPart = rng._randomizeBottomPart()
-	rocketModifier = rng._randomizeModifier()
-	#modulate = rng._colorRandomize()
+	rocketPart.modulate = rng._colorRandomize()
 	sprite.texture = rocketPart.partSprite
 	# nameString = rng._statsNameRandomize()

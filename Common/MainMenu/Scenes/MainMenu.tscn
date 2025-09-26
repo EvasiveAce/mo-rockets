@@ -7,6 +7,9 @@
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("3_aui2q")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -24,6 +27,9 @@ cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
 
 [sub_resource type="FontFile" id="2"]
 fallbacks = Array[Font]([ExtResource("3_aui2q")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -38,6 +44,26 @@ cache/0/32/0/underline_thickness = 0.0
 cache/0/32/0/scale = 1.0
 cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
 cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/128/0/ascent = 0.0
+cache/0/128/0/descent = 0.0
+cache/0/128/0/underline_position = 0.0
+cache/0/128/0/underline_thickness = 0.0
+cache/0/128/0/scale = 1.0
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/60/0/ascent = 0.0
+cache/0/60/0/descent = 0.0
+cache/0/60/0/underline_position = 0.0
+cache/0/60/0/underline_thickness = 0.0
+cache/0/60/0/scale = 1.0
+cache/0/72/0/ascent = 0.0
+cache/0/72/0/descent = 0.0
+cache/0/72/0/underline_position = 0.0
+cache/0/72/0/underline_thickness = 0.0
+cache/0/72/0/scale = 1.0
 
 [sub_resource type="AtlasTexture" id="3"]
 atlas = ExtResource("4_sseev")
@@ -110,7 +136,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"TransitionIn",
-"speed": 16.0
+"speed": 32.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -133,17 +159,20 @@ animations = [{
 }],
 "loop": false,
 "name": &"TransitionOut",
-"speed": 16.0
+"speed": 32.0
 }]
 
 [node name="MainMenu" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_rtvn0")
+metadata/_edit_vertical_guides_ = [960.0]
 
 [node name="TitleScreenSprite" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("2_4sgky")
 
 [node name="Altitude" type="Label" parent="."]
+visible = false
 texture_filter = 1
 offset_left = 768.0
 offset_top = 496.0
@@ -164,14 +193,21 @@ theme_override_font_sizes/font_size = 32
 text = "0.0"
 
 [node name="Space" type="Label" parent="."]
-texture_filter = 1
-offset_left = 744.0
-offset_top = 560.0
-offset_right = 1178.0
-offset_bottom = 596.0
+offset_left = 479.0
+offset_top = 509.0
+offset_right = 1441.0
+offset_bottom = 590.0
+size_flags_vertical = 1
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -4
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 8
 theme_override_fonts/font = SubResource("2")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 72
 text = "Press Space to LAUNCH"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AssemblyAnimationSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(960, 540)

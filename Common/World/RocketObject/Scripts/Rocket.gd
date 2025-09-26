@@ -16,6 +16,9 @@ var bottomTexture
 var bottomModulate
 
 
+var launching = false
+var grounded = false
+
 @export var fuelToUse: float = 0.0
 var fuelToRecord: float = 0.0
 
@@ -23,14 +26,30 @@ var fuelToRecord: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	topSprite.texture = noseTexture
-	bodySprite.texture = bodyTexture
-	bottomSprite.texture = bottomTexture
-	# topSprite.modulate = noseModulate
-	# bodySprite.modulate = bodyModulate
-	# bottomSprite.modulate = bottomModulate
-	# particles.modulate = bottomModulate
-	_setUp()
+	if noseTexture and noseModulate and bodyTexture and bodyModulate and bottomTexture and bottomModulate:
+		topSprite.texture = noseTexture
+		bodySprite.texture = bodyTexture
+		bottomSprite.texture = bottomTexture
+		topSprite.modulate = noseModulate
+		bodySprite.modulate = bodyModulate
+		bottomSprite.modulate = bottomModulate
+
+		var gradient = Gradient.new()
+
+		gradient.add_point(0, bottomModulate)
+		gradient.add_point(.36, bodyModulate)
+		gradient.add_point(.72, noseModulate)
+
+		gradient.remove_point(0)
+		gradient.remove_point(0)
+
+		var gradientTexture = GradientTexture1D.new()
+		gradientTexture.set_gradient(gradient)
+		gradient.interpolation_mode = 1
+
+		# Set the gradient
+		particles.process_material.set_color_ramp(gradientTexture)
+		_setUp()
 
 #func _movement():
 #	if Input.is_action_pressed("ui_left"):
@@ -42,16 +61,23 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	#_movement()
-	if !timer.is_stopped():
-		position.y -= speedToUse
-		fuelToUse = timer.time_left
+	if $RocketSoundTimer.time_left > 0:
 		$Rocket.play()
+
+		
+	if fuelToUse > 0 and launching:
+		var fuel_consumption_rate = 1.0 + (speedToUse / Constants.fuelConsumptionRate)
+		var distance_gain_rate = speedToUse * fuel_consumption_rate
+		position.y -= distance_gain_rate * _delta * 60
+		fuelToUse = max(0.0, fuelToUse - fuel_consumption_rate * _delta)
 	else:
+		launching = false
 		if position.y >= 600 and fuelToUse <= 0.0:
+			grounded = true
 			$Camera2D.enabled = false
-		particles.set_emitting(false)
+			particles.set_emitting(false)
 		$Rocket.stop()
-		if position.y <= 600 and fuelToUse <= 0:
+		if position.y <= 600 and fuelToUse <= 0 and !grounded:
 			position.y += speedToUse * 4
 
 
@@ -59,16 +85,22 @@ func _blastOff():
 	Constants.amountOfLaunches += 1
 	$RocketLaunch.play()
 	particles.set_emitting(true)
-	timer.start()
-	$Rocket.play()
-
+	launching = true
+	$RocketSoundTimer.start()
+	
 func _setUp():
-	fuelToUse = Constants.defaultFuel + Constants.fuel
-	speedToUse = Constants.defaultSpeed + Constants.speed
+	fuelToUse = (Constants.defaultFuel + Constants.fuel) * Constants.statMultiplier
+	if fuelToUse < Constants.defaultFuel:
+		fuelToUse = Constants.defaultFuel
+	speedToUse = (Constants.defaultSpeed + Constants.speed) * Constants.statMultiplier
+	if speedToUse < Constants.defaultSpeed:
+		speedToUse = Constants.defaultSpeed
 	speedToUse = snappedf(speedToUse, 0.01)
 	fuelToUse = snappedf(fuelToUse, 0.01)
 	fuelToRecord = fuelToUse
 	timer.wait_time = fuelToUse
+	Constants.legacySpeed = Constants.speed
+	Constants.legacyFuel = Constants.fuel
 	Constants.speed = 0.0
 	Constants.fuel = 0.0
 
@@ -77,16 +109,27 @@ func _on_RocketTimer_timeout():
 	fuelToUse = 0.0
 
 func _explode():
-	if fuelToRecord > 10.0:
-		$RocketExplodeParticles.amount = 100
+	launching = false
+	$TopSprite.visible = false
+	$BodySprite.visible = false
+	$BottomSprite.visible = false
+	if _hasWarParts():
+		$RocketExplodeParticles.amount = 500
 		$RocketExplodeHigh.play()
-	elif fuelToRecord >= 2.5 and fuelToRecord < 10.0:
+	elif fuelToRecord >= ((Constants.highestAltitude) / 500.0):
 		$RocketExplodeParticles.amount = 50
 		$RocketExplodeMedium.play()
 	else:
 		$RocketExplodeParticles.amount = 25
 		$RocketExplodeLow.play()
-	$TopSprite.visible = false
-	$BodySprite.visible = false
-	$BottomSprite.visible = false
+
 	$RocketExplodeParticles.set_emitting(true)
+
+func _hasWarParts() -> bool:
+	return (noseTexture and "war" in noseTexture.resource_path.to_lower()) or \
+		   (bodyTexture and "war" in bodyTexture.resource_path.to_lower()) or \
+		   (bottomTexture and "war" in bottomTexture.resource_path.to_lower())
+
+
+func _on_rocket_particles_finished() -> void:
+	$Rocket.stop()

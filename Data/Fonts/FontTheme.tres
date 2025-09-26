@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://jagt0aunbhrv"]
+
+[ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="1_yb2kh"]
+
+[resource]
+default_font = ExtResource("1_yb2kh")
+default_font_size = 64
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/shadow_offset_x = -1
+Label/constants/shadow_outline_size = 6

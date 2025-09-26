@@ -1,0 +1,158 @@
+[gd_scene load_steps=16 format=3 uid="uid://bjof5wi4af24t"]
+
+[ext_resource type="Script" uid="uid://by83eiejoph28" path="res://Common/EndScene/Scripts/EndScene.gd" id="1_trv6b"]
+[ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="2_0h5rf"]
+[ext_resource type="Texture2D" uid="uid://b20iqhv62jxku" path="res://Common/World/Sprites/Parralax.png" id="3_5x2uc"]
+[ext_resource type="AudioStream" uid="uid://baftgwx4s2ao3" path="res://Common/World/Sounds/Record.wav" id="4_tcgfh"]
+[ext_resource type="AudioStream" uid="uid://cgnobrm7anv5p" path="res://Common/World/Sounds/PartsUnlocked.wav" id="5_q48q0"]
+[ext_resource type="AudioStream" uid="uid://cht2ym8qgw68f" path="res://Common/World/Sounds/NoRecord.wav" id="6_pll64"]
+[ext_resource type="Texture2D" uid="uid://bsaqd1axd2erc" path="res://Common/AssemblyStage/Sprites/TransitionAnimation.png" id="7_htrri"]
+
+[sub_resource type="FontFile" id="FontFile_hmi11"]
+fallbacks = Array[Font]([ExtResource("2_0h5rf")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+
+[sub_resource type="AtlasTexture" id="10"]
+atlas = ExtResource("7_htrri")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="11"]
+atlas = ExtResource("7_htrri")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="12"]
+atlas = ExtResource("7_htrri")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="13"]
+atlas = ExtResource("7_htrri")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="14"]
+atlas = ExtResource("7_htrri")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="15"]
+atlas = ExtResource("7_htrri")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e7o67"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("10")
+}, {
+"duration": 1.0,
+"texture": SubResource("11")
+}, {
+"duration": 1.0,
+"texture": SubResource("12")
+}, {
+"duration": 1.0,
+"texture": SubResource("13")
+}, {
+"duration": 1.0,
+"texture": SubResource("14")
+}, {
+"duration": 1.0,
+"texture": SubResource("15")
+}],
+"loop": false,
+"name": &"TransitionOut",
+"speed": 32.0
+}]
+
+[node name="EndScrene" type="Node2D"]
+script = ExtResource("1_trv6b")
+
+[node name="RocketSubview" type="SubViewportContainer" parent="."]
+texture_filter = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="SubViewport" type="SubViewport" parent="RocketSubview"]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="RocketSubview/SubViewport"]
+
+[node name="Record" type="Label" parent="RocketSubview/SubViewport/CanvasLayer"]
+visible = false
+texture_filter = 1
+offset_left = 720.0
+offset_top = 342.0
+offset_right = 1206.0
+offset_bottom = 486.0
+theme_override_fonts/font = SubResource("FontFile_hmi11")
+theme_override_font_sizes/font_size = 64
+text = "New Best Run!"
+horizontal_alignment = 1
+
+[node name="Parts" type="Label" parent="RocketSubview/SubViewport/CanvasLayer"]
+visible = false
+texture_filter = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -198.0
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontFile_hmi11")
+theme_override_font_sizes/font_size = 64
+text = "Mk. 1 Parts Unlocked!"
+horizontal_alignment = 1
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="RocketSubview/SubViewport/CanvasLayer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="RocketSubview/SubViewport/CanvasLayer/ParallaxBackground"]
+motion_mirroring = Vector2(0, 2160)
+
+[node name="Sky" type="Sprite2D" parent="RocketSubview/SubViewport/CanvasLayer/ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+position = Vector2(960, 540)
+texture = ExtResource("3_5x2uc")
+
+[node name="AnimationTimer" type="Timer" parent="RocketSubview/SubViewport"]
+one_shot = true
+
+[node name="Record" type="AudioStreamPlayer" parent="RocketSubview/SubViewport"]
+stream = ExtResource("4_tcgfh")
+pitch_scale = 0.75
+
+[node name="PartsUnlocked" type="AudioStreamPlayer" parent="RocketSubview/SubViewport"]
+stream = ExtResource("5_q48q0")
+
+[node name="NoRecord" type="AudioStreamPlayer" parent="RocketSubview/SubViewport"]
+stream = ExtResource("6_pll64")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="RocketSubview/SubViewport"]
+
+[node name="AssemblyAnimationSprite" type="AnimatedSprite2D" parent="RocketSubview/SubViewport/CanvasLayer2"]
+texture_filter = 1
+position = Vector2(960, 540)
+sprite_frames = SubResource("SpriteFrames_e7o67")
+animation = &"TransitionOut"

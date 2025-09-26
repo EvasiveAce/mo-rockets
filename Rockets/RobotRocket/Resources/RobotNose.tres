@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RocketPart" load_steps=3 format=3 uid="uid://vsyc22q5ox0h"]
+
+[ext_resource type="Texture2D" uid="uid://cdfrskacat02x" path="res://Rockets/RobotRocket/Sprites/RobotNose.png" id="1_a7ipm"]
+[ext_resource type="Script" uid="uid://uy4ow50n7icm" path="res://Rockets/Scripts/RocketPart.gd" id="1_bkbfr"]
+
+[resource]
+script = ExtResource("1_bkbfr")
+partType = 0
+statModifier1Name = 0
+statModifier1Amount = 0.0
+statModifier2Name = 0
+statModifier2Amount = 0.0
+partSprite = ExtResource("1_a7ipm")
+constantsName = ""
+boughtBool = false
+unlockedBool = false
+upgradeName = ""
+upgradeCost = 0
+upgradeDesc = ""
+upgradeInfo = ""
+metadata/_custom_type_script = "uid://uy4ow50n7icm"
