@@ -95,12 +95,22 @@ func _fillOutButton(button : Button, part, partValue):
 		for value in speedArray:
 			speedValue += value.values()[0]
 
+		var negative = false
+		if speedValue < 0:
+			negative = true
+
+		var _exp = str(abs(speedValue)).split(".")[0].length() - 1
+		var _dec = abs(speedValue) / pow(10,_exp)
+
+		if negative:
+			_dec *= -1
+
 		var mainLabel = Label.new()
 		var mainNumberLabel = Label.new()
 		mainLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainNumberLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainLabel.text = "SPEED"
-		mainNumberLabel.text = ("+" if speedValue > 0 else "") + "%.2f" % speedValue
+		mainNumberLabel.text = str(("+" if speedValue > 0 else "") + "%.2f" % speedValue if speedValue <= 1000 and speedValue >= -1000 else "%.2f e%s" % [_dec, _exp])
 		trait_vbox.add_child(mainLabel)
 		number_vbox.add_child(mainNumberLabel)
 		var spaceLabel = Label.new()
@@ -112,12 +122,22 @@ func _fillOutButton(button : Button, part, partValue):
 		for value in fuelArray:
 			fuelValue += value.values()[0]
 
+		var negative = false
+		if fuelValue < 0:
+			negative = true
+
+		var _exp = str(fuelValue).split(".")[0].length() - 1
+		var _dec = fuelValue / pow(10,_exp)
+
+		if negative:
+			_dec *= -1
+
 		var mainLabel = Label.new()
 		var mainNumberLabel = Label.new()
 		mainLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainNumberLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainLabel.text = "FUEL"
-		mainNumberLabel.text = ("+" if fuelValue > 0 else "") + "%.2f" % fuelValue
+		mainNumberLabel.text = str(("+" if fuelValue > 0 else "") + "%.2f" % fuelValue if fuelValue <= 1000 and fuelValue >= -1000 else "%.2f e%s" % [_dec, _exp])
 		trait_vbox.add_child(mainLabel)
 		number_vbox.add_child(mainNumberLabel)
 	#partName.text = str(part.rocketModifier.modifierName) + " " + str(part.rocketPart.upgradeName) if part.rocketModifier != null else str(part.rocketPart.upgradeName)

@@ -15,9 +15,12 @@ var bodyModulate
 var bottomTexture
 var bottomModulate
 
+var fauxSpeed = 50.0
 
 var launching = false
 var grounded = false
+
+var reachedHeight = false
 
 @export var fuelToUse: float = 0.0
 var fuelToRecord: float = 0.0
@@ -64,21 +67,39 @@ func _process(_delta):
 	if $RocketSoundTimer.time_left > 0:
 		$Rocket.play()
 
-		
+	var fuel_consumption_rate
+	var distance_gain_rate
 	if fuelToUse > 0 and launching:
-		var fuel_consumption_rate = 1.0 + (speedToUse / Constants.fuelConsumptionRate)
-		var distance_gain_rate = speedToUse * fuel_consumption_rate
-		position.y -= distance_gain_rate * _delta * 60
-		fuelToUse = max(0.0, fuelToUse - fuel_consumption_rate * _delta)
+		if Constants.endlessModeEnabled and speedToUse >= 100000 and $RocketSoundTimer.time_left > 0:
+			fuel_consumption_rate = 1.0 + (speedToUse / Constants.fuelConsumptionRate)
+			distance_gain_rate = fauxSpeed * fuel_consumption_rate
+			position.y -= fauxSpeed * (1.0 + (fauxSpeed / Constants.fuelConsumptionRate)) * _delta * 60
+			fuelToUse = max(0.0, fuelToUse - fuel_consumption_rate * _delta)
+		elif Constants.endlessModeEnabled and speedToUse >= 100000 and $RocketSoundTimer.time_left == 0:
+			reachedHeight = true
+			fuel_consumption_rate = 1.0 + (speedToUse / Constants.fuelConsumptionRate)
+			fuelToUse = max(0.0, fuelToUse - fuel_consumption_rate * _delta)
+		elif !Constants.endlessModeEnabled:
+			fuel_consumption_rate = 1.0 + (speedToUse / Constants.fuelConsumptionRate)
+			distance_gain_rate = speedToUse * fuel_consumption_rate
+			position.y -= distance_gain_rate * _delta * 60
+			fuelToUse = max(0.0, fuelToUse - fuel_consumption_rate * _delta)
 	else:
 		launching = false
-		if position.y >= 600 and fuelToUse <= 0.0:
-			grounded = true
-			$Camera2D.enabled = false
+		if Constants.endlessModeEnabled:
+			$Rocket.stop()
 			particles.set_emitting(false)
-		$Rocket.stop()
-		if position.y <= 600 and fuelToUse <= 0 and !grounded:
-			position.y += speedToUse * 4
+			if fuelToUse <= 0.0:
+				grounded = true
+				reachedHeight = false
+		else:
+			if position.y >= 600 and fuelToUse <= 0.0:
+				grounded = true
+				$Camera2D.enabled = false
+				particles.set_emitting(false)
+			$Rocket.stop()
+			if position.y <= 600 and fuelToUse <= 0 and !grounded:
+				position.y += speedToUse * 4
 
 
 func _blastOff():

@@ -265,8 +265,7 @@ theme_override_constants/outline_size = 9
 theme_override_constants/shadow_outline_size = 8
 theme_override_fonts/font = SubResource("FontFile_mhbkf")
 theme_override_font_sizes/font_size = 72
-text = "It is buggy at larger numbers, so
-the results may vary. If you got this far,
+text = "If you got this far,
 thank you for playing my game!"
 
 [node name="Text3" type="Label" parent="."]

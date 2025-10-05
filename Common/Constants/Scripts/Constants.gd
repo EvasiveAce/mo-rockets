@@ -26,6 +26,7 @@ var bottomParts = [preload('res://Rockets/BaseRocket/Resources/BaseBottom.tres')
 ## DATA
 var highestAltitude := 1000
 var altitude = 0.0
+var infinities = 0.0
 var amountOfLaunches := 0
 var statMultiplier = 1.00
 
