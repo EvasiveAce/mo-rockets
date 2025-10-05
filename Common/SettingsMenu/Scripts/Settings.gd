@@ -14,6 +14,8 @@ func _on_line_edit_text_submitted(new_text:String) -> void:
 
 
 func _ready():
+	if Constants.mobile:
+		$MenuButton.visible = true
 	visible = false
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
@@ -75,3 +77,21 @@ func _on_fuel_consump_value_changed(value: float) -> void:
 		Constants.fuelConsumptionRate = 75.0
 	else:
 		Constants.fuelConsumptionRate = 25.0
+
+
+func _on_menu_button_pressed() -> void:
+	if !Constants.transitioning and open:
+		Settings._hide_settings()
+
+
+func _on_copy_pressed() -> void:
+	DisplayServer.clipboard_set($TabContainer/Settings/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Panel/MarginContainer/ImportExportText.text)
+	$TabContainer/Settings/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ValidationCode.modulate = 'ffffff'
+	$TabContainer/Settings/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ValidationCode.text = 'Success! Save code copied to clipboard.'
+
+
+func _on_paste_pressed() -> void:
+	var clipboard_text = DisplayServer.clipboard_get()
+	$TabContainer/Settings/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Panel/MarginContainer/ImportExportText.text = clipboard_text
+	$TabContainer/Settings/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ValidationCode.modulate = 'ffffff'
+	$TabContainer/Settings/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ValidationCode.text = 'Success! Save code pasted from clipboard.'

@@ -5,6 +5,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if Constants.mobile:
+		$Text3.text = "Tap to Continue"
 	animation.flip_v = true
 	animation.play("TransitionIn")
 	animation.flip_v = false
@@ -20,3 +22,15 @@ func _process(_delta):
 		animation.play("TransitionOut")
 		await animation.animation_finished
 		get_tree().change_scene_to_file("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch && event.is_pressed():
+		Constants.transitioning = true
+		if Constants.tutorial:
+			animation.play("TransitionOut")
+			await animation.animation_finished
+			get_tree().change_scene_to_file("res://Common/Tutorial/Scenes/Tutorial.tscn")
+		animation.play("TransitionOut")
+		await animation.animation_finished
+		get_tree().change_scene_to_file("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn") 

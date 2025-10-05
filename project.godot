@@ -74,10 +74,15 @@ pause={
 ]
 }
 
+[input_devices]
+
+buffering/emulate_touch_from_mouse=true
+
 [physics]
 
 common/enable_pause_aware_picking=true
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_environment="res://Common/MiscData/default_env.tres"

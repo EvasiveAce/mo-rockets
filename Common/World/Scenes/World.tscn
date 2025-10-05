@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b0k8dqawn6up3"]
+[gd_scene load_steps=34 format=3 uid="uid://b0k8dqawn6up3"]
 
 [ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="1"]
 [ext_resource type="Script" uid="uid://cpntb1c2by1kf" path="res://Common/World/Scripts/World.gd" id="1_u70lu"]
@@ -8,8 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://b20iqhv62jxku" path="res://Common/World/Sprites/Parralax.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://cnjwhhf5ij2m4" path="res://Common/World/Sprites/SkyBackground.png" id="6"]
 [ext_resource type="AudioStream" uid="uid://cht2ym8qgw68f" path="res://Common/World/Sounds/NoRecord.wav" id="7"]
+[ext_resource type="Theme" uid="uid://bf0d0soyhf8p7" path="res://Common/AssemblyStage/Themes/AssemblyStage.tres" id="7_xv5hd"]
 [ext_resource type="AudioStream" uid="uid://baftgwx4s2ao3" path="res://Common/World/Sounds/Record.wav" id="8"]
 [ext_resource type="Texture2D" uid="uid://dp2516hmxidc8" path="res://Common/World/Ground/Sprites/SkyVariant1.png" id="8_7ngjb"]
+[ext_resource type="Texture2D" uid="uid://c7i7v3u7q8dsh" path="res://Common/World/Sprites/MenuButton.png" id="8_idegw"]
 [ext_resource type="Script" uid="uid://cgk02w8spec84" path="res://Common/World/Ground/Scripts/SkyParallax.gd" id="8_xv5hd"]
 [ext_resource type="AudioStream" uid="uid://cgnobrm7anv5p" path="res://Common/World/Sounds/PartsUnlocked.wav" id="11_g7jo6"]
 [ext_resource type="Theme" uid="uid://cw60nbpchu4td" path="res://Common/SettingsMenu/Themes/ButtonTheme.tres" id="12_g7jo6"]
@@ -332,6 +334,18 @@ centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="MenuButton" type="Button" parent="CanvasLayer"]
+visible = false
+texture_filter = 1
+offset_left = 1808.0
+offset_top = 16.0
+offset_right = 1840.0
+offset_bottom = 48.0
+scale = Vector2(3, 3)
+theme = ExtResource("7_xv5hd")
+icon = ExtResource("8_idegw")
+flat = true
+
 [node name="Record" type="Label" parent="CanvasLayer"]
 visible = false
 texture_filter = 1
@@ -541,5 +555,15 @@ position = Vector2(960, 540)
 sprite_frames = SubResource("16")
 animation = &"TransitionIn"
 
+[node name="MobileClick" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 144.0
+offset_right = 1920.0
+offset_bottom = 848.0
+
+[connection signal="pressed" from="CanvasLayer/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/AbortLaunch" to="." method="_on_abort_launch_pressed"]
 [connection signal="pressed" from="ScrapRocket" to="." method="_on_scrap_rocket_pressed"]
+[connection signal="mouse_entered" from="MobileClick" to="." method="_on_mobile_click_mouse_entered"]
+[connection signal="mouse_exited" from="MobileClick" to="." method="_on_mobile_click_mouse_exited"]
