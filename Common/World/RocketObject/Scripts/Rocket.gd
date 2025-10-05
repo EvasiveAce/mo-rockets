@@ -70,12 +70,12 @@ func _process(_delta):
 	var fuel_consumption_rate
 	var distance_gain_rate
 	if fuelToUse > 0 and launching:
-		if Constants.endlessModeEnabled and speedToUse >= 100000 and $RocketSoundTimer.time_left > 0:
+		if Constants.endlessModeEnabled and $RocketSoundTimer.time_left > 0:
 			fuel_consumption_rate = 1.0 + (speedToUse / Constants.fuelConsumptionRate)
 			distance_gain_rate = fauxSpeed * fuel_consumption_rate
 			position.y -= fauxSpeed * (1.0 + (fauxSpeed / Constants.fuelConsumptionRate)) * _delta * 60
 			fuelToUse = max(0.0, fuelToUse - fuel_consumption_rate * _delta)
-		elif Constants.endlessModeEnabled and speedToUse >= 100000 and $RocketSoundTimer.time_left == 0:
+		elif Constants.endlessModeEnabled and $RocketSoundTimer.time_left == 0:
 			reachedHeight = true
 			fuel_consumption_rate = 1.0 + (speedToUse / Constants.fuelConsumptionRate)
 			fuelToUse = max(0.0, fuelToUse - fuel_consumption_rate * _delta)
@@ -111,11 +111,9 @@ func _blastOff():
 	
 func _setUp():
 	fuelToUse = (Constants.defaultFuel + Constants.fuel) * Constants.statMultiplier
-	if fuelToUse < Constants.defaultFuel:
-		fuelToUse = Constants.defaultFuel
+	fuelToUse = clamp(fuelToUse, Constants.defaultFuel, 9223372036854775807)
 	speedToUse = (Constants.defaultSpeed + Constants.speed) * Constants.statMultiplier
-	if speedToUse < Constants.defaultSpeed:
-		speedToUse = Constants.defaultSpeed
+	speedToUse = clamp(speedToUse, Constants.defaultSpeed, 9223372036854775807)
 	speedToUse = snappedf(speedToUse, 0.01)
 	fuelToUse = snappedf(fuelToUse, 0.01)
 	fuelToRecord = fuelToUse

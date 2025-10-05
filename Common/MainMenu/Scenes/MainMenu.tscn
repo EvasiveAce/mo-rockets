@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://b11l3imu0g6p1"]
+[gd_scene load_steps=22 format=3 uid="uid://b11l3imu0g6p1"]
 
 [ext_resource type="Script" uid="uid://bwrf6rwjiu0nw" path="res://Common/MainMenu/Scripts/MainMenu.gd" id="1_rtvn0"]
 [ext_resource type="Texture2D" uid="uid://ddq5k3eiwq2v3" path="res://Common/MainMenu/Sprites/TitleScreen.png" id="2_4sgky"]
 [ext_resource type="FontFile" uid="uid://myt3e0s5hvpc" path="res://Data/Fonts/Kenney Future Narrow.ttf" id="3_aui2q"]
+[ext_resource type="Theme" uid="uid://bf0d0soyhf8p7" path="res://Common/AssemblyStage/Themes/AssemblyStage.tres" id="3_sseev"]
 [ext_resource type="Texture2D" uid="uid://bsaqd1axd2erc" path="res://Common/AssemblyStage/Sprites/TransitionAnimation.png" id="4_sseev"]
+[ext_resource type="Texture2D" uid="uid://c7i7v3u7q8dsh" path="res://Common/World/Sprites/MenuButton.png" id="4_ui4mk"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("3_aui2q")])
@@ -171,6 +173,18 @@ metadata/_edit_vertical_guides_ = [960.0]
 position = Vector2(960, 540)
 texture = ExtResource("2_4sgky")
 
+[node name="MenuButton" type="Button" parent="."]
+visible = false
+texture_filter = 1
+offset_left = 1808.0
+offset_top = 16.0
+offset_right = 1840.0
+offset_bottom = 48.0
+scale = Vector2(3, 3)
+theme = ExtResource("3_sseev")
+icon = ExtResource("4_ui4mk")
+flat = true
+
 [node name="Altitude" type="Label" parent="."]
 visible = false
 texture_filter = 1
@@ -213,3 +227,14 @@ vertical_alignment = 1
 position = Vector2(960, 540)
 sprite_frames = SubResource("15")
 animation = &"TransitionIn"
+
+[node name="MobileClick" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 144.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="mouse_entered" from="MobileClick" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="MobileClick" to="." method="_on_control_mouse_exited"]

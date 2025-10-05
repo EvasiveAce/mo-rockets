@@ -32,6 +32,12 @@ var statMultiplier = 1.00
 
 var initLoading = false
 
+var mobile = false
+
+func _ready() -> void:
+	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
+		mobile = true
+
 ## UPGRADES ##
 
 # Endless Mode

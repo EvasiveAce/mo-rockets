@@ -39,6 +39,21 @@ func _process(_delta: float) -> void:
 				Constants.statMultiplier += .01
 			Constants.altitude = 0.0	
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch && event.is_pressed() and Constants.mobile and recordFuncFinished and !switching:
+		switching = true
+		$RocketSubview/SubViewport/CanvasLayer2/AssemblyAnimationSprite.play("TransitionOut")
+		await $RocketSubview/SubViewport/CanvasLayer2/AssemblyAnimationSprite.animation_finished
+		if Constants.endText:
+			get_tree().change_scene_to_file("res://Common/EndScene/Scenes/EndText.tscn")
+		else:
+			get_tree().change_scene_to_file("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
+		if Constants.highestAltitude == Constants.altitude:
+			Constants.statMultiplier += .05
+		else:
+			Constants.statMultiplier += .01
+		Constants.altitude = 0.0	
+
 func _recordFunc():
 	# Legacy Fuel/Speed - Corroded Parts
 	if (Constants.legacyFuel <= 0 and Constants.legacySpeed <= 0) and !Constants.corrodedPartsUpgrade:

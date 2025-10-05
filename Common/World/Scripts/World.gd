@@ -11,6 +11,8 @@ var bodyScene
 var bottomScene
 var launchScene
 
+var inArea
+
 @onready var rocketObject = preload("res://Common/World/RocketObject/Scenes/Rocket.tscn")
 
 @onready var altitude
@@ -36,6 +38,8 @@ var shake_amount = 0.0
 var shake_decay = 0.05
 
 func _ready() -> void:
+	if Constants.mobile:
+		$CanvasLayer/MenuButton.visible = true
 	%AbortLaunch.visible = false
 	if Constants.scrapButtonEnabled:
 		$ScrapRocket.visible = true
@@ -168,6 +172,30 @@ func _process(_delta):
 						Constants.statMultiplier += .01
 					Constants.altitude = 0.0
 					Constants.infinities = 0
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch && event.is_pressed() and Constants.mobile and firstTime and inArea:
+		$ScrapRocket.visible = false
+		rocket._blastOff()
+		shake_amount = 3.5
+		set_timer()
+		firstTime = false
+	if !endEngaged and !switching and recordFuncFinished:
+		if event is InputEventScreenTouch && event.is_pressed() and Constants.mobile:
+			Constants.scrollbaseOffset = $Ground/SkyParallax.scroll_base_offset.x
+			Constants.cloudPosition = $Ground/SkyParallax/ParallaxLayer.position.x
+			switching = true
+			Constants.transitioning = true
+			animation.play("TransitionOut")
+			await animation.animation_finished
+			get_tree().change_scene_to_file("res://Common/AssemblyStage/Scenes/AssemblyStage.tscn")
+			rocketAssembled = false
+			if Constants.highestAltitude == Constants.altitude:
+				Constants.statMultiplier += .05
+			else:
+				Constants.statMultiplier += .01
+			Constants.altitude = 0.0
+			Constants.infinities = 0
 
 func set_timer():
 	await get_tree().create_timer(5.75).timeout
@@ -505,3 +533,16 @@ func _on_abort_launch_pressed() -> void:
 			Constants.highestAltitude = Constants.altitude
 	endEngaged = false
 	_recordFunc()
+
+
+func _on_menu_button_pressed() -> void:
+	if !Constants.transitioning:
+		Settings._show_settings()
+
+
+
+func _on_mobile_click_mouse_exited() -> void:
+	inArea = false
+
+func _on_mobile_click_mouse_entered() -> void:
+	inArea = true

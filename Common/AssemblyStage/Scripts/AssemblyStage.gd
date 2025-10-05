@@ -3,6 +3,8 @@ extends Node2D
 @onready var assemblySprite = load("res://Common/AssemblyStage/Sprites/AssemblyScreen.png")
 @onready var assemblySpriteNoUpgrade = load("res://Common/AssemblyStage/Sprites/AssemblyScreenDefault.png")
 
+@onready var mobileTheme = load("res://Common/AssemblyStage/Themes/AssemblyStageMobile.tres")
+
 @onready var partObject
 @onready var text = $AssemblyLabel
 @onready var animation = $AssemblyAnimationSprite
@@ -46,6 +48,12 @@ func _ready():
 	_fillOutButton(button1, part1, part1Value)
 	_fillOutButton(button2, part2, part2Value)
 	_fillOutButton(button3, part3, part3Value)
+
+	if Constants.mobile:
+		$MenuButton.visible = true
+		$AssemblyButton1.theme = mobileTheme
+		$AssemblyButton2.theme = mobileTheme
+		$AssemblyButton3.theme = mobileTheme
 	await animation.animation_finished
 	Constants.transitioning = false
 
@@ -110,7 +118,7 @@ func _fillOutButton(button : Button, part, partValue):
 		mainLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainNumberLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainLabel.text = "SPEED"
-		mainNumberLabel.text = str(("+" if speedValue > 0 else "") + "%.2f" % speedValue if speedValue <= 1000 and speedValue >= -1000 else "%.2f e%s" % [_dec, _exp])
+		mainNumberLabel.text = str(("+" if speedValue > 0 else "") + "%.2f" % speedValue if speedValue <= 10000 and speedValue >= -10000 else ("+" if speedValue > 0 else "") + "%.2f e%s" % [_dec, _exp])
 		trait_vbox.add_child(mainLabel)
 		number_vbox.add_child(mainNumberLabel)
 		var spaceLabel = Label.new()
@@ -126,8 +134,8 @@ func _fillOutButton(button : Button, part, partValue):
 		if fuelValue < 0:
 			negative = true
 
-		var _exp = str(fuelValue).split(".")[0].length() - 1
-		var _dec = fuelValue / pow(10,_exp)
+		var _exp = str(abs(fuelValue)).split(".")[0].length() - 1
+		var _dec = abs(fuelValue) / pow(10,_exp)
 
 		if negative:
 			_dec *= -1
@@ -137,7 +145,7 @@ func _fillOutButton(button : Button, part, partValue):
 		mainLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainNumberLabel.label_settings = preload("res://Data/Resources/LabelSettings.tres")
 		mainLabel.text = "FUEL"
-		mainNumberLabel.text = str(("+" if fuelValue > 0 else "") + "%.2f" % fuelValue if fuelValue <= 1000 and fuelValue >= -1000 else "%.2f e%s" % [_dec, _exp])
+		mainNumberLabel.text = str(("+" if fuelValue > 0 else "") + "%.2f" % fuelValue if fuelValue <= 10000 and fuelValue >= -10000 else ("+" if fuelValue > 0 else "") + "%.2f e%s" % [_dec, _exp])
 		trait_vbox.add_child(mainLabel)
 		number_vbox.add_child(mainNumberLabel)
 	#partName.text = str(part.rocketModifier.modifierName) + " " + str(part.rocketPart.upgradeName) if part.rocketModifier != null else str(part.rocketPart.upgradeName)
@@ -226,3 +234,8 @@ func _on_button_toggled(toggled_on:bool) -> void:
 		Constants.endlessModeEnabled = false
 		$EndlessButton.modulate = 'ff0000'
 		$EndlessSelect.play()
+
+
+func _on_menu_button_pressed() -> void:
+	if !Constants.transitioning:
+		Settings._show_settings()
