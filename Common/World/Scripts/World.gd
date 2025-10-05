@@ -44,7 +44,10 @@ func _ready() -> void:
 	_initalizeRocket()
 	var stringToUse = "%.2fx"
 	$CanvasLayer/Multiplier/MultiplierValue.text = stringToUse % [Constants.statMultiplier]
-	$HighScore.text = str(Constants.highestAltitude) + ' m' if Constants.highestAltitude < 100000 else str(Constants.highestAltitude/1000) + ' km'
+	if Constants.highestAltitude >= 10000000000:
+		$HighScore.text = str("10e%d" % (Constants.highestAltitude - 10000000000))
+	else:
+		$HighScore.text = str(Constants.highestAltitude) + ' m' if Constants.highestAltitude < 100000 else str(Constants.highestAltitude/1000.0) + ' km'
 	if !Constants.initLoading:
 		rocket.get_node('RocketParticles2').lifetime = .01
 		rocket.get_node('RocketParticles2').amount = 1
@@ -104,18 +107,49 @@ func _process(_delta):
 			altitude = get_node("CanvasLayer/Altitude")
 			speed.text = str(rocket.speedToUse)
 			fuel.text = str(snapped(rocket.fuelToUse, 0.01))
-			if (rocket.position.y - 625) * -1 >= Constants.altitude:
-				Constants.altitude = snapped((rocket.position.y - 625) * -1, 1)
-				if Constants.altitude >= 100000:
+			if Constants.endlessModeEnabled and rocket.launching:
+				var distance_this_frame = snapped((rocket.speedToUse * (1.0 + (rocket.speedToUse / Constants.fuelConsumptionRate)) * _delta * 60), 1)
+				Constants.altitude += distance_this_frame
+				if Constants.altitude >= 10000000000 or Constants.infinities > 0:
+					if Constants.altitude >= 10000000000:
+						Constants.altitude = 1
+						Constants.infinities += 1
+						altitude.text = str("10e%d" % [Constants.infinities])
+					else:
+						altitude.text = str("10e%d" % [Constants.infinities])
+				elif Constants.altitude >= 1000000000 and Constants.infinities == 0:
+					altitude.text = str(Constants.altitude/1000000000) + "gm"
+				elif Constants.altitude >= 10000000 and Constants.infinities == 0:
+					altitude.text = str(Constants.altitude/1000000) + "mm"
+				elif Constants.altitude >= 100000 and Constants.infinities == 0:
 					altitude.text = str(Constants.altitude/1000) + "km"
-				else:
+				elif Constants.infinities == 0:
 					altitude.text = str(Constants.altitude) + "m"
+			elif !Constants.endlessModeEnabled:
+				if (rocket.position.y - 625) * -1 >= Constants.altitude:
+					Constants.altitude = snapped((rocket.position.y - 625) * -1, 1)
+					if Constants.altitude >= 100000:
+						altitude.text = str(Constants.altitude/1000) + "km"
+					else:
+						altitude.text = str(Constants.altitude) + "m"
+			elif Constants.endlessModeEnabled and Constants.infinities < 1 and Constants.altitude == 0.0:
+				altitude.text = str(Constants.altitude) + "m"
+
+			if rocket.reachedHeight and Constants.endlessModeEnabled and endEngaged:
+				$CanvasLayer/ParallaxBackground.scroll_base_offset.y += 50 * (1.0 + (100 / Constants.fuelConsumptionRate)) * _delta * 60
+			
 			if (Input.is_action_just_released("ui_accept") and firstTime):
 				$ScrapRocket.visible = false
 				rocket._blastOff()
 				shake_amount = 3.5
 				set_timer()
 				firstTime = false
+			if Constants.endlessModeEnabled and !rocket.launching and !firstTime and endEngaged:
+				rocket._explode()
+				Constants.altitude = 10000000000 + Constants.infinities
+				if Constants.altitude > Constants.highestAltitude:
+					Constants.highestAltitude = Constants.altitude
+				endEngaged = false
 			_endGame()
 			_recordFunc()
 			if !endEngaged and !switching and recordFuncFinished:
@@ -133,6 +167,7 @@ func _process(_delta):
 					else:
 						Constants.statMultiplier += .01
 					Constants.altitude = 0.0
+					Constants.infinities = 0
 
 func set_timer():
 	await get_tree().create_timer(5.75).timeout
@@ -461,7 +496,12 @@ func _on_abort_launch_pressed() -> void:
 	rocket.grounded = true
 	%AbortLaunch.visible = false
 	rocket._explode()
-	if Constants.altitude > Constants.highestAltitude:
-		Constants.highestAltitude = Constants.altitude
+	if Constants.endlessModeEnabled and !rocket.launching and !firstTime and endEngaged:
+		Constants.altitude = 10000000000 + Constants.infinities
+		if Constants.altitude > Constants.highestAltitude:
+			Constants.highestAltitude = Constants.altitude
+	else:
+		if Constants.altitude > Constants.highestAltitude:
+			Constants.highestAltitude = Constants.altitude
 	endEngaged = false
 	_recordFunc()
